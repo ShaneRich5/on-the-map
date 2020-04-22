@@ -43,8 +43,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="loginUsingCredentials:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k0H-0H-ANF"/>
-                                    <action selector="loginUsingEmailAndPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N6B-3k-Nbn"/>
+                                    <action selector="loginUsingCredentials:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n2d-ZU-cLJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sC2-jz-KKF">
