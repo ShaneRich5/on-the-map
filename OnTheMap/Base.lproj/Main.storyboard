@@ -42,16 +42,34 @@
                                 <rect key="frame" x="182" y="450" width="38" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginUsingCredentials:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k0H-0H-ANF"/>
+                                    <action selector="loginUsingEmailAndPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N6B-3k-Nbn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sC2-jz-KKF">
                                 <rect key="frame" x="88" y="503" width="219" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Don't have an account? Sign Up"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DjI-ma-Uup">
+                                <rect key="frame" x="135" y="776" width="145" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Log in with Facebook"/>
+                                <connections>
+                                    <action selector="loginUsingFacebook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ydp-0l-8fx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="Wrh-rr-Ees" id="qXL-Cn-m68"/>
+                        <outlet property="facebookButton" destination="DjI-ma-Uup" id="a3O-Fn-ON2"/>
+                        <outlet property="passwordTextField" destination="0Xg-DH-wwA" id="qnG-fC-rzz"/>
+                        <outlet property="signUpButton" destination="sC2-jz-KKF" id="IId-cL-kei"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
