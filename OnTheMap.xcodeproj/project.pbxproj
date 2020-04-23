@@ -17,6 +17,7 @@
 		E7452E2C244FE8C300AF7611 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E2B244FE8C300AF7611 /* Credentials.swift */; };
 		E7452E2E244FEFDB00AF7611 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E2D244FEFDB00AF7611 /* LoginResponse.swift */; };
 		E7809F1324513225003B10AE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F1224513225003B10AE /* MapViewController.swift */; };
+		E7809F152451393F003B10AE /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F142451393F003B10AE /* AddPinViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		E7452E2B244FE8C300AF7611 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		E7452E2D244FEFDB00AF7611 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		E7809F1224513225003B10AE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E7809F142451393F003B10AE /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				E7452E17244F1EB500AF7611 /* ViewController.swift */,
 				E7452E28244FE44D00AF7611 /* LoginViewController.swift */,
 				E7809F1224513225003B10AE /* MapViewController.swift */,
+				E7809F142451393F003B10AE /* AddPinViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				E7452E2C244FE8C300AF7611 /* Credentials.swift in Sources */,
 				E7452E18244F1EB500AF7611 /* ViewController.swift in Sources */,
 				E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */,
+				E7809F152451393F003B10AE /* AddPinViewController.swift in Sources */,
 				E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */,
 				E7452E2E244FEFDB00AF7611 /* LoginResponse.swift in Sources */,
 				E7809F1324513225003B10AE /* MapViewController.swift in Sources */,

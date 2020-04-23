@@ -109,6 +109,62 @@
             </objects>
             <point key="canvasLocation" x="3232" y="-188"/>
         </scene>
+        <!--Add Pin View Controller-->
+        <scene sceneID="VXl-KB-RM7">
+            <objects>
+                <viewController storyboardIdentifier="AddPinViewController" id="xy1-zp-Wlh" customClass="AddPinViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QAB-l4-fdp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAM-Nw-JeP">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem title="Cancel" id="zYb-x1-lC1">
+                                        <connections>
+                                            <action selector="cancelSubmission:" destination="xy1-zp-Wlh" id="x8s-A0-a4C"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where are you studying today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1r5-Bv-zJG">
+                                <rect key="frame" x="89" y="184" width="237" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Your Location Here" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rRQ-jt-ecA">
+                                <rect key="frame" x="149" y="377" width="189" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrM-yu-Iju">
+                                <rect key="frame" x="152" y="608" width="111" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Find on the Map"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EAM-Nw-JeP" firstAttribute="trailing" secondItem="AGW-Sl-feE" secondAttribute="trailing" id="AQ6-f4-M9E"/>
+                            <constraint firstItem="EAM-Nw-JeP" firstAttribute="leading" secondItem="AGW-Sl-feE" secondAttribute="leading" id="HXs-lA-PHf"/>
+                            <constraint firstItem="EAM-Nw-JeP" firstAttribute="top" secondItem="AGW-Sl-feE" secondAttribute="top" id="tl0-Ia-iw2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="AGW-Sl-feE"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="zYb-x1-lC1" id="BC2-MS-WjJ"/>
+                        <outlet property="findLocationButton" destination="TrM-yu-Iju" id="Dwc-er-q0g"/>
+                        <outlet property="locationLabel" destination="1r5-Bv-zJG" id="9kE-t5-AiP"/>
+                        <outlet property="locationTextField" destination="rRQ-jt-ecA" id="5aA-X3-hkZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ry-lA-mNO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4511" y="118"/>
+        </scene>
         <!--Map View Controller-->
         <scene sceneID="nfB-KD-LiZ">
             <objects>
