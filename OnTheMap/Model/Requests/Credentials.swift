@@ -9,11 +9,6 @@
 import Foundation
 
 
-struct UdacityCredentials: Codable {
-    let udacity: Credentials!
-}
-
-
 struct Credentials: Codable {
     let username: String!
     let password: String!

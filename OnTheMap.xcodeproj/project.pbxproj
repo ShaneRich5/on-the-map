@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E72985892454B7F0006E0DB8 /* UdacityCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72985882454B7F0006E0DB8 /* UdacityCredentials.swift */; };
+		E729858C2454B867006E0DB8 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729858B2454B867006E0DB8 /* Account.swift */; };
+		E729858E2454B883006E0DB8 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729858D2454B883006E0DB8 /* Session.swift */; };
+		E72985902454BD85006E0DB8 /* StudentListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729858F2454BD85006E0DB8 /* StudentListResponse.swift */; };
 		E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E13244F1EB500AF7611 /* AppDelegate.swift */; };
 		E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E15244F1EB500AF7611 /* SceneDelegate.swift */; };
 		E7452E18244F1EB500AF7611 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E17244F1EB500AF7611 /* ViewController.swift */; };
@@ -16,11 +20,18 @@
 		E7452E29244FE44D00AF7611 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E28244FE44D00AF7611 /* LoginViewController.swift */; };
 		E7452E2C244FE8C300AF7611 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E2B244FE8C300AF7611 /* Credentials.swift */; };
 		E7452E2E244FEFDB00AF7611 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E2D244FEFDB00AF7611 /* LoginResponse.swift */; };
-		E7809F1324513225003B10AE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F1224513225003B10AE /* MapViewController.swift */; };
+		E7809F1324513225003B10AE /* StudentTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F1224513225003B10AE /* StudentTabViewController.swift */; };
 		E7809F152451393F003B10AE /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F142451393F003B10AE /* AddPinViewController.swift */; };
+		E7809F172452A863003B10AE /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F162452A863003B10AE /* StudentListViewController.swift */; };
+		E7809F192452A92E003B10AE /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F182452A92E003B10AE /* StudentTableViewCell.swift */; };
+		E7809F1B2452AC08003B10AE /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F1A2452AC08003B10AE /* Student.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E72985882454B7F0006E0DB8 /* UdacityCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityCredentials.swift; sourceTree = "<group>"; };
+		E729858B2454B867006E0DB8 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		E729858D2454B883006E0DB8 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		E729858F2454BD85006E0DB8 /* StudentListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListResponse.swift; sourceTree = "<group>"; };
 		E7452E10244F1EB500AF7611 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7452E13244F1EB500AF7611 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7452E15244F1EB500AF7611 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,8 +43,11 @@
 		E7452E28244FE44D00AF7611 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E7452E2B244FE8C300AF7611 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		E7452E2D244FEFDB00AF7611 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
-		E7809F1224513225003B10AE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E7809F1224513225003B10AE /* StudentTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTabViewController.swift; sourceTree = "<group>"; };
 		E7809F142451393F003B10AE /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
+		E7809F162452A863003B10AE /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
+		E7809F182452A92E003B10AE /* StudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
+		E7809F1A2452AC08003B10AE /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +61,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E72985872454B793006E0DB8 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				E7452E2D244FEFDB00AF7611 /* LoginResponse.swift */,
+				E7809F1A2452AC08003B10AE /* Student.swift */,
+				E729858B2454B867006E0DB8 /* Account.swift */,
+				E729858D2454B883006E0DB8 /* Session.swift */,
+				E729858F2454BD85006E0DB8 /* StudentListResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		E729858A2454B83D006E0DB8 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				E7452E2B244FE8C300AF7611 /* Credentials.swift */,
+				E72985882454B7F0006E0DB8 /* UdacityCredentials.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
 		E7452E07244F1EB500AF7611 = {
 			isa = PBXGroup;
 			children = (
@@ -81,8 +116,9 @@
 			children = (
 				E7452E17244F1EB500AF7611 /* ViewController.swift */,
 				E7452E28244FE44D00AF7611 /* LoginViewController.swift */,
-				E7809F1224513225003B10AE /* MapViewController.swift */,
+				E7809F1224513225003B10AE /* StudentTabViewController.swift */,
 				E7809F142451393F003B10AE /* AddPinViewController.swift */,
+				E7809F162452A863003B10AE /* StudentListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -90,8 +126,9 @@
 		E7452E2A244FE8A100AF7611 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E7452E2B244FE8C300AF7611 /* Credentials.swift */,
-				E7452E2D244FEFDB00AF7611 /* LoginResponse.swift */,
+				E729858A2454B83D006E0DB8 /* Requests */,
+				E72985872454B793006E0DB8 /* Responses */,
+				E7809F182452A92E003B10AE /* StudentTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,14 +214,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E729858E2454B883006E0DB8 /* Session.swift in Sources */,
 				E7452E29244FE44D00AF7611 /* LoginViewController.swift in Sources */,
+				E729858C2454B867006E0DB8 /* Account.swift in Sources */,
+				E7809F192452A92E003B10AE /* StudentTableViewCell.swift in Sources */,
 				E7452E2C244FE8C300AF7611 /* Credentials.swift in Sources */,
+				E7809F1B2452AC08003B10AE /* Student.swift in Sources */,
+				E72985892454B7F0006E0DB8 /* UdacityCredentials.swift in Sources */,
 				E7452E18244F1EB500AF7611 /* ViewController.swift in Sources */,
 				E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */,
 				E7809F152451393F003B10AE /* AddPinViewController.swift in Sources */,
+				E7809F172452A863003B10AE /* StudentListViewController.swift in Sources */,
 				E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */,
 				E7452E2E244FEFDB00AF7611 /* LoginResponse.swift in Sources */,
-				E7809F1324513225003B10AE /* MapViewController.swift in Sources */,
+				E7809F1324513225003B10AE /* StudentTabViewController.swift in Sources */,
+				E72985902454BD85006E0DB8 /* StudentListResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
