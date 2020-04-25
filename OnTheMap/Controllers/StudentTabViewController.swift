@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MapViewController: UITabBarController {
+class StudentTabViewController: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
