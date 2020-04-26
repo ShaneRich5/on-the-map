@@ -33,6 +33,7 @@ class AddLocationViewController: UIViewController {
     
     func shouldEnableButton() {
         if let location = locationTextField.text, let mediaUrl = mediaUrlTextField.text {
+            print("location\(!location.isEmpty): \(location), mediaUrl \(!mediaUrl.isEmpty): \(mediaUrl)")
             findLocationButton.isEnabled = !location.isEmpty && !mediaUrl.isEmpty
         } else {
             findLocationButton.isEnabled = false
@@ -41,8 +42,7 @@ class AddLocationViewController: UIViewController {
 }
 
 extension AddLocationViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         shouldEnableButton()
-        return true
     }
 }

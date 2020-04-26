@@ -27,7 +27,7 @@ class StudentTabViewController: UITabBarController {
     
     @objc func addPin() {
         let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (action) in
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
             controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated: true)
         }
