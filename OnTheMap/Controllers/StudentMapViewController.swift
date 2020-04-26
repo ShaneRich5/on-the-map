@@ -9,7 +9,11 @@
 import UIKit
 import MapKit
 
-class StudentMapViewController: UIViewController {
+protocol Refreshable {
+    func refresh(students: [Student]) -> Void
+}
+
+class StudentMapViewController: UIViewController, Refreshable {
     static var reuseMapId = "studentPin"
 
     @IBOutlet weak var mapView: MKMapView!
@@ -19,13 +23,13 @@ class StudentMapViewController: UIViewController {
         let appDelegate = object as! AppDelegate
         return appDelegate.students
     }
-//        set {
-//            annotations = newValue.map {student in loadAnnotation(student) }
-//            mapView.addAnnotations(<#T##annotations: [MKAnnotation]##[MKAnnotation]#>)
-//        }
-//    }
-    
     var annotations: [MKPointAnnotation]!
+    
+    
+    func refresh(students: [Student]) {
+        let annotations = self.students.map { student in loadAnnotation(student) }
+        mapView.addAnnotations(annotations)
+    }
     
     func loadAnnotation(_ student: Student) -> MKPointAnnotation {
         let latitude = CLLocationDegrees(student.latitude)

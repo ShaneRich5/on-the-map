@@ -26,6 +26,12 @@ class StudentListViewController: UIViewController {
     }
 }
 
+extension StudentListViewController: Refreshable {
+    func refresh(students: [Student]) {
+        self.tableView.reloadData()
+    }
+}
+
 extension StudentListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StudentTableViewCell.reuseIdentifier) as! StudentTableViewCell

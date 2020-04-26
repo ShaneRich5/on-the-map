@@ -47,6 +47,10 @@ class StudentTabViewController: UITabBarController {
                     let object = UIApplication.shared.delegate
                     let appDelegate = object as! AppDelegate
                     appDelegate.students = result.results
+                    
+                    if let refreshableController = self.tabBarController?.selectedViewController as? Refreshable {
+                        refreshableController.refresh(students: result.results)
+                    }
                 } catch {
                     print("error occured: \(error)")
                 }
@@ -54,9 +58,6 @@ class StudentTabViewController: UITabBarController {
         }
         
         task.resume()
-        
-        
-        
     }
     
     @objc func refresh() {
