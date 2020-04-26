@@ -200,9 +200,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="2XO-z6-bdO"/>
                     <connections>
-                        <outlet property="addPinButton" destination="jjP-uP-ERD" id="tDH-Mk-mqf"/>
+                        <outlet property="findLocationButton" destination="jjP-uP-ERD" id="anf-Mv-9oH"/>
                         <outlet property="locationTextField" destination="9Ne-qN-BUi" id="9Hn-0z-pen"/>
-                        <outlet property="mediaURLTextField" destination="aFU-n3-YHN" id="dsC-MC-syF"/>
+                        <outlet property="mediaUrlTextField" destination="aFU-n3-YHN" id="hfp-3h-Iye"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMV-Wa-9CP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
