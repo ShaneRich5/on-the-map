@@ -24,15 +24,6 @@ class AddLocationViewController: UIViewController {
         mediaUrlTextField.delegate = self
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == AddLocationViewController.segueIdentifier {
-//            let addPinViewController = segue.destination as! AddPinViewController
-//            addPinViewController.mediaUrl = mediaUrlTextField.text
-//            addPinViewController.location = locationTextField.text
-//            addPinViewController.displayLocation(annotation: annotation!)
-//        }
-//    }
-    
     func shouldEnableButton() {
         if let location = locationTextField.text, let mediaUrl = mediaUrlTextField.text {
             findLocationButton.isEnabled = !location.isEmpty && !mediaUrl.isEmpty
@@ -52,32 +43,21 @@ class AddLocationViewController: UIViewController {
                 return
             }
             
-            guard let placemarker = response.mapItems.first?.placemark else {
-                print("Error: no markers returned")
-                return
+            if let placemarker = response.mapItems.first?.placemark {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = placemarker.coordinate
+                annotation.title = placemarker.title
+                
+                let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
+                
+                controller.annotation = annotation
+                controller.location = self.locationTextField.text
+                controller.mediaUrl = self.mediaUrlTextField.text
+                controller.modalPresentationStyle = .fullScreen
+                
+                self.navigationController!.pushViewController(controller, animated: true)
             }
-            
-            let annotation = self.createAnnotation(placemarker: placemarker)
-            self.navigateToMap(annotation)
         })
-    }
-    
-    func createAnnotation(placemarker: MKPlacemark) -> MKPointAnnotation {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = placemarker.coordinate
-        annotation.title = placemarker.title
-        return annotation
-    }
-    
-    func navigateToMap(_ annotation: MKPointAnnotation) {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
-        
-        controller.annotation = annotation
-        controller.location = self.locationTextField.text
-        controller.mediaUrl = self.mediaUrlTextField.text
-        controller.modalPresentationStyle = .fullScreen
-        
-        self.navigationController!.pushViewController(controller, animated: true)
     }
 }
 

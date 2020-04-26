@@ -219,7 +219,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Pyc-q0-H2b">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngp-tB-W6r">
                                 <rect key="frame" x="187" y="781" width="41" height="30"/>
@@ -262,6 +262,7 @@
                     <connections>
                         <segue destination="Pnu-qc-Erz" kind="relationship" relationship="viewControllers" id="xtU-bN-SmG"/>
                         <segue destination="f96-Or-mOy" kind="relationship" relationship="viewControllers" id="q1I-rY-8Z1"/>
+                        <segue destination="wST-MM-2jN" kind="show" identifier="addLocation" id="nhW-P6-MFj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zLh-nE-pAu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -305,6 +306,9 @@
             <point key="canvasLocation" x="5234.7826086956529" y="59.598214285714285"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="nhW-P6-MFj"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_listview-deselected" width="75" height="50"/>
         <image name="icon_listview-selected" width="75" height="50"/>

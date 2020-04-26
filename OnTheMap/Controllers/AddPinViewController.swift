@@ -21,15 +21,20 @@ class AddPinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.addAnnotation(annotation)
-        print("annotation: \(annotation)")
     }
     
     @IBAction func saveStudentLocation(_ sender: Any) {
-        
-    }
-    
-    func displayLocation(annotation: MKPointAnnotation) {
-        mapView.addAnnotation(annotation)
-        print("annotation: \(annotation)")
+        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: .utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+          if error != nil { // Handle error…
+              return
+          }
+          print(String(data: data!, encoding: .utf8)!)
+        }
+        task.resume()
     }
 }
