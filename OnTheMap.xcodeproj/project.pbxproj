@@ -13,7 +13,6 @@
 		E72985902454BD85006E0DB8 /* StudentListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729858F2454BD85006E0DB8 /* StudentListResponse.swift */; };
 		E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E13244F1EB500AF7611 /* AppDelegate.swift */; };
 		E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E15244F1EB500AF7611 /* SceneDelegate.swift */; };
-		E7452E18244F1EB500AF7611 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E17244F1EB500AF7611 /* ViewController.swift */; };
 		E7452E1B244F1EB500AF7611 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7452E19244F1EB500AF7611 /* Main.storyboard */; };
 		E7452E1D244F1EB700AF7611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7452E1C244F1EB700AF7611 /* Assets.xcassets */; };
 		E7452E20244F1EB700AF7611 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7452E1E244F1EB700AF7611 /* LaunchScreen.storyboard */; };
@@ -21,10 +20,11 @@
 		E7452E2C244FE8C300AF7611 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E2B244FE8C300AF7611 /* Credentials.swift */; };
 		E7452E2E244FEFDB00AF7611 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E2D244FEFDB00AF7611 /* LoginResponse.swift */; };
 		E7809F1324513225003B10AE /* StudentTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F1224513225003B10AE /* StudentTabViewController.swift */; };
-		E7809F152451393F003B10AE /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F142451393F003B10AE /* AddPinViewController.swift */; };
 		E7809F172452A863003B10AE /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F162452A863003B10AE /* StudentListViewController.swift */; };
 		E7809F192452A92E003B10AE /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F182452A92E003B10AE /* StudentTableViewCell.swift */; };
 		E7809F1B2452AC08003B10AE /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F1A2452AC08003B10AE /* Student.swift */; };
+		E7B48A60245534EE00D8AC62 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A5F245534EE00D8AC62 /* AddLocationViewController.swift */; };
+		E7B48A622455351700D8AC62 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A612455351700D8AC62 /* AddPinViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,6 @@
 		E7452E10244F1EB500AF7611 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7452E13244F1EB500AF7611 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7452E15244F1EB500AF7611 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E7452E17244F1EB500AF7611 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E7452E1A244F1EB500AF7611 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7452E1C244F1EB700AF7611 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7452E1F244F1EB700AF7611 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -44,10 +43,11 @@
 		E7452E2B244FE8C300AF7611 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		E7452E2D244FEFDB00AF7611 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		E7809F1224513225003B10AE /* StudentTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTabViewController.swift; sourceTree = "<group>"; };
-		E7809F142451393F003B10AE /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
 		E7809F162452A863003B10AE /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
 		E7809F182452A92E003B10AE /* StudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
 		E7809F1A2452AC08003B10AE /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		E7B48A5F245534EE00D8AC62 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		E7B48A612455351700D8AC62 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,11 +114,11 @@
 		E7452E27244FE41D00AF7611 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E7452E17244F1EB500AF7611 /* ViewController.swift */,
 				E7452E28244FE44D00AF7611 /* LoginViewController.swift */,
 				E7809F1224513225003B10AE /* StudentTabViewController.swift */,
-				E7809F142451393F003B10AE /* AddPinViewController.swift */,
 				E7809F162452A863003B10AE /* StudentListViewController.swift */,
+				E7B48A5F245534EE00D8AC62 /* AddLocationViewController.swift */,
+				E7B48A612455351700D8AC62 /* AddPinViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -218,12 +218,12 @@
 				E7452E29244FE44D00AF7611 /* LoginViewController.swift in Sources */,
 				E729858C2454B867006E0DB8 /* Account.swift in Sources */,
 				E7809F192452A92E003B10AE /* StudentTableViewCell.swift in Sources */,
+				E7B48A622455351700D8AC62 /* AddPinViewController.swift in Sources */,
 				E7452E2C244FE8C300AF7611 /* Credentials.swift in Sources */,
 				E7809F1B2452AC08003B10AE /* Student.swift in Sources */,
 				E72985892454B7F0006E0DB8 /* UdacityCredentials.swift in Sources */,
-				E7452E18244F1EB500AF7611 /* ViewController.swift in Sources */,
+				E7B48A60245534EE00D8AC62 /* AddLocationViewController.swift in Sources */,
 				E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */,
-				E7809F152451393F003B10AE /* AddPinViewController.swift in Sources */,
 				E7809F172452A863003B10AE /* StudentListViewController.swift in Sources */,
 				E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */,
 				E7452E2E244FEFDB00AF7611 /* LoginResponse.swift in Sources */,
