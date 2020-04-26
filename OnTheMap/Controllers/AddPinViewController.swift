@@ -10,20 +10,26 @@ import UIKit
 import MapKit
 
 class AddPinViewController: UIViewController {
-
-    var location: String!
-    var mediaUrl: String!
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var finishButton: UIButton!
     
+    var location: String!
+    var mediaUrl: String!
+    var annotation: MKPointAnnotation!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.addAnnotation(annotation)
+        print("annotation: \(annotation)")
     }
     
     @IBAction func saveStudentLocation(_ sender: Any) {
         
     }
     
+    func displayLocation(annotation: MKPointAnnotation) {
+        mapView.addAnnotation(annotation)
+        print("annotation: \(annotation)")
+    }
 }

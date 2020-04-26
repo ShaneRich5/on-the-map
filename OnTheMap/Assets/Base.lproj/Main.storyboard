@@ -191,7 +191,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Find Location"/>
                                 <connections>
-                                    <segue destination="Zzz-gM-KYX" kind="show" identifier="addPin" id="jY9-Tg-WlN"/>
+                                    <action selector="submitLocation:" destination="wST-MM-2jN" eventType="touchUpInside" id="ndn-Sy-k4X"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -203,6 +203,7 @@
                         <outlet property="findLocationButton" destination="jjP-uP-ERD" id="anf-Mv-9oH"/>
                         <outlet property="locationTextField" destination="9Ne-qN-BUi" id="9Hn-0z-pen"/>
                         <outlet property="mediaUrlTextField" destination="aFU-n3-YHN" id="hfp-3h-Iye"/>
+                        <segue destination="Zzz-gM-KYX" kind="show" id="tCi-hQ-a3R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMV-Wa-9CP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -212,7 +213,7 @@
         <!--Add Pin View Controller-->
         <scene sceneID="wEt-xF-bwo">
             <objects>
-                <viewController id="Zzz-gM-KYX" customClass="AddPinViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPinViewController" id="Zzz-gM-KYX" customClass="AddPinViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z7p-6A-57u">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
