@@ -11,6 +11,7 @@
 		E729858C2454B867006E0DB8 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729858B2454B867006E0DB8 /* Account.swift */; };
 		E729858E2454B883006E0DB8 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729858D2454B883006E0DB8 /* Session.swift */; };
 		E72985902454BD85006E0DB8 /* StudentListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729858F2454BD85006E0DB8 /* StudentListResponse.swift */; };
+		E72985922454CAED006E0DB8 /* StudentMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72985912454CAED006E0DB8 /* StudentMapViewController.swift */; };
 		E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E13244F1EB500AF7611 /* AppDelegate.swift */; };
 		E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E15244F1EB500AF7611 /* SceneDelegate.swift */; };
 		E7452E18244F1EB500AF7611 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7452E17244F1EB500AF7611 /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 		E729858B2454B867006E0DB8 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E729858D2454B883006E0DB8 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		E729858F2454BD85006E0DB8 /* StudentListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListResponse.swift; sourceTree = "<group>"; };
+		E72985912454CAED006E0DB8 /* StudentMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentMapViewController.swift; sourceTree = "<group>"; };
 		E7452E10244F1EB500AF7611 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7452E13244F1EB500AF7611 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7452E15244F1EB500AF7611 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				E7809F1224513225003B10AE /* StudentTabViewController.swift */,
 				E7809F142451393F003B10AE /* AddPinViewController.swift */,
 				E7809F162452A863003B10AE /* StudentListViewController.swift */,
+				E72985912454CAED006E0DB8 /* StudentMapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				E7809F172452A863003B10AE /* StudentListViewController.swift in Sources */,
 				E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */,
 				E7452E2E244FEFDB00AF7611 /* LoginResponse.swift in Sources */,
+				E72985922454CAED006E0DB8 /* StudentMapViewController.swift in Sources */,
 				E7809F1324513225003B10AE /* StudentTabViewController.swift in Sources */,
 				E72985902454BD85006E0DB8 /* StudentListResponse.swift in Sources */,
 			);

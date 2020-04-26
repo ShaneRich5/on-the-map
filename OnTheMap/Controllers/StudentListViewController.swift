@@ -13,43 +13,16 @@ class StudentListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let segueIdentifier = "followLink"
-    var students = [Student]()
+    var students: [Student]! {
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        return appDelegate.students
+    }
     var selectedIndex = 0
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let url = URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print("Request Error \(error)")
-                return
-            }
-
-            DispatchQueue.main.async {
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(StudentListResponse.self, from: data)
-                    self.students = result.results
-                    self.tableView.reloadData()
-                } catch {
-                    print("error occured: \(error)")
-                }
-            }
-        }
-        
-        task.resume()
     }
 }
 

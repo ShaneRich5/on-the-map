@@ -21,8 +21,47 @@ class StudentTabViewController: UITabBarController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: refreshIcon, style: .plain, target: self, action: #selector(refresh))
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadStudents()
+    }
+    
+    func loadStudents() {
+        let url = URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print("Request Error \(error)")
+                return
+            }
+
+            DispatchQueue.main.async {
+                do {
+                    let decoder = JSONDecoder()
+                    let result = try decoder.decode(StudentListResponse.self, from: data)
+                    let object = UIApplication.shared.delegate
+                    let appDelegate = object as! AppDelegate
+                    appDelegate.students = result.results
+                } catch {
+                    print("error occured: \(error)")
+                }
+            }
+        }
+        
+        task.resume()
+        
+        
+        
+    }
+    
     @objc func refresh() {
         print("refreshing...")
+        loadStudents()
     }
     
     @objc func addPin() {

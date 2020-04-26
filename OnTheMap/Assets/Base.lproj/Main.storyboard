@@ -149,14 +149,28 @@
         <!--Map-->
         <scene sceneID="Aqb-Z7-OoC">
             <objects>
-                <viewController id="Pnu-qc-Erz" sceneMemberID="viewController">
+                <viewController id="Pnu-qc-Erz" customClass="StudentMapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mJN-0f-iMl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vxA-hY-tR8">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vxA-hY-tR8" firstAttribute="top" secondItem="FRD-LC-eov" secondAttribute="top" id="IHp-Mz-TXA"/>
+                            <constraint firstItem="vxA-hY-tR8" firstAttribute="leading" secondItem="FRD-LC-eov" secondAttribute="leading" id="XvM-vs-7mm"/>
+                            <constraint firstItem="FRD-LC-eov" firstAttribute="bottom" secondItem="vxA-hY-tR8" secondAttribute="bottom" id="n69-5W-k8V"/>
+                            <constraint firstItem="FRD-LC-eov" firstAttribute="trailing" secondItem="vxA-hY-tR8" secondAttribute="trailing" id="uft-gE-zDx"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="FRD-LC-eov"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-selected" selectedImage="icon_mapview-deselected" id="gWm-3b-mbT"/>
+                    <connections>
+                        <outlet property="mapView" destination="vxA-hY-tR8" id="kWI-cf-aor"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6D-gn-O1V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
