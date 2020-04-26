@@ -62,10 +62,6 @@ class AddLocationViewController: UIViewController {
         })
     }
     
-    func handlerSearch() {
-        
-    }
-    
     func createAnnotation(placemarker: MKPlacemark) -> MKPointAnnotation {
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemarker.coordinate
