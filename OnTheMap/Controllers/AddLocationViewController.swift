@@ -13,7 +13,7 @@ class AddLocationViewController: UIViewController {
     static var segueIdentifier = "addPin"
     
     @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var mediaURLTextField: UITextField!
     @IBOutlet weak var addPinButton: UIButton!
     
     override func viewDidLoad() {
@@ -22,9 +22,10 @@ class AddLocationViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == AddLocationViewController.segueIdentifier {
-            
+            let addPinViewController = segue.destination as! AddPinViewController
+            addPinViewController.mediaUrl = mediaURLTextField.text
+            addPinViewController.location = locationTextField.text
         }
     }
 }

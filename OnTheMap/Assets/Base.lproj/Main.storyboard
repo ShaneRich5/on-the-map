@@ -202,7 +202,7 @@
                     <connections>
                         <outlet property="addPinButton" destination="jjP-uP-ERD" id="tDH-Mk-mqf"/>
                         <outlet property="locationTextField" destination="9Ne-qN-BUi" id="9Hn-0z-pen"/>
-                        <outlet property="urlTextField" destination="aFU-n3-YHN" id="Pkg-Fj-2ml"/>
+                        <outlet property="mediaURLTextField" destination="aFU-n3-YHN" id="dsC-MC-syF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMV-Wa-9CP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -216,10 +216,33 @@
                     <view key="view" contentMode="scaleToFill" id="z7p-6A-57u">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Pyc-q0-H2b">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngp-tB-W6r">
+                                <rect key="frame" x="187" y="781" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Finish"/>
+                                <connections>
+                                    <action selector="saveStudentLocation:" destination="Zzz-gM-KYX" eventType="touchUpInside" id="B45-CH-kqv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="nSz-ps-oYd" firstAttribute="trailing" secondItem="Pyc-q0-H2b" secondAttribute="trailing" id="elq-Ul-ZIb"/>
+                            <constraint firstItem="Pyc-q0-H2b" firstAttribute="top" secondItem="nSz-ps-oYd" secondAttribute="top" id="krR-Q9-caE"/>
+                            <constraint firstItem="nSz-ps-oYd" firstAttribute="bottom" secondItem="Pyc-q0-H2b" secondAttribute="bottom" id="wZi-r8-YrW"/>
+                            <constraint firstItem="Pyc-q0-H2b" firstAttribute="leading" secondItem="nSz-ps-oYd" secondAttribute="leading" id="yjd-KD-iz9"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nSz-ps-oYd"/>
                     </view>
                     <navigationItem key="navigationItem" id="90M-A3-TBj"/>
+                    <connections>
+                        <outlet property="finishButton" destination="ngp-tB-W6r" id="cfV-KT-tbB"/>
+                        <outlet property="mapView" destination="Pyc-q0-H2b" id="WPa-IM-gA7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKd-RS-rzG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
