@@ -11,12 +11,17 @@ import UIKit
 
 
 class LoginViewController: UIViewController {
+    static var segueIdentifier = "goToMap"
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var userId: String?
+    var sessionId: String?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,52 +35,85 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailTextField.text = "shane.richards121@gmail.com"
+        showRequestInProgress(false)
+    }
+    
+    func showRequestInProgress(_ isInProgress: Bool) {
+        if isInProgress {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        
+        emailTextField.isEnabled = isInProgress
+        passwordTextField.isEnabled = isInProgress
+        loginButton.isEnabled = isInProgress
+        signUpButton.isEnabled = isInProgress
+        facebookButton.isEnabled = isInProgress
+    }
+    
+    func buildRequestForSession(email: String, password: String) -> URLRequest {
+        let credentials = UdacityCredentials(udacity: Credentials(username: email, password: password))
+        let url = URL(string: "https://onthemap-api.udacity.com/v1/session")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try! JSONEncoder().encode(credentials) // TODO: alert for errors
+        
+        return request
+    }
+    
+    func parseLoginResponseData(_ data: Data) throws -> LoginResponse {
+        let range = 5..<data.count
+        let data = data.subdata(in: range)
+
+        let decoder = JSONDecoder()
+        return try decoder.decode(LoginResponse.self, from: data)
+//        let sessionId = loginResponse.session.id
     }
     
     @IBAction func loginUsingCredentials(_ sender: Any) {
-        performSegue(withIdentifier: "goToMap", sender: nil)
+//        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MapTabViewController") as! ResultsViewController
+        guard let email = emailTextField?.text else {
+            print("email is required") // TODO: Alert here
+            return
+        }
         
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MapTabViewController") as! ResultsViewController
-//        vc.userChoice = getUserShape(sender)
-//        present(vc, animated: true, completion: nil)
-//        let email = emailTextField.text ?? ""
-//        let password = passwordTextField.text ?? ""
-//        let credentials = UdacityCredentials(udacity: Credentials(username: email, password: password))
-//
-//        let url = URL(string: "https://onthemap-api.udacity.com/v1/session")!
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        request.addValue("application/json", forHTTPHeaderField: "Accept")
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//
-//        // handle this properly
-//        request.httpBody = try! JSONEncoder().encode(credentials)
-//
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data else {
-//                DispatchQueue.main.async {
-//                    self.displayAlert(title: "Request Error", message: "\(error)")
-//                }
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                do {
-//                    let range = 5..<data.count
-//                    let data = data.subdata(in: range)
-//
-//                    let decoder = JSONDecoder()
-//                    let loginResponse = try decoder.decode(LoginResponse.self, from: data)
-//                    let sessionId = loginResponse.session.id
-//
-//                    self.displayAlert(title: "Login Successful", message: "Session ID: \(sessionId ?? "No ID")")
-//                } catch { error
-//                    self.displayAlert(title: "Error", message: "Unable to parse response \(error)")
-//                }
-//            }
-//        }
-//
-//        task.resume()
+        guard let password = passwordTextField?.text else {
+            print("password is empty") // TODO: Alert here
+            return
+        }
+        
+        showRequestInProgress(true)
+        
+        let request = buildRequestForSession(email: email, password: password)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            guard let data = data else {
+                print("Not data received")
+                return
+            }
+
+            DispatchQueue.main.async {
+                do {
+                    let loginResponse = try self.parseLoginResponseData(data)
+                    let sessionId = loginResponse.session.id
+
+                    print(sessionId!)
+                } catch {
+                    print(error)
+                }
+            }
+        }
+
+        task.resume()
     }
     
     @IBAction func loginUsingFacebook(_ sender: Any) {

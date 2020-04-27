@@ -26,6 +26,8 @@
 		E7809F1B2452AC08003B10AE /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7809F1A2452AC08003B10AE /* Student.swift */; };
 		E7B48A60245534EE00D8AC62 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A5F245534EE00D8AC62 /* AddLocationViewController.swift */; };
 		E7B48A622455351700D8AC62 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A612455351700D8AC62 /* AddPinViewController.swift */; };
+		E7B48A6524564CB600D8AC62 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A6424564CB600D8AC62 /* Refreshable.swift */; };
+		E7B48A672456947100D8AC62 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A662456947100D8AC62 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		E7809F1A2452AC08003B10AE /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		E7B48A5F245534EE00D8AC62 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		E7B48A612455351700D8AC62 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
+		E7B48A6424564CB600D8AC62 /* Refreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
+		E7B48A662456947100D8AC62 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 				E7452E21244F1EB700AF7611 /* Info.plist */,
 				E7452E2F24500CEB00AF7611 /* Assets */,
 				E7452E2A244FE8A100AF7611 /* Model */,
+				E7B48A6324564C7500D8AC62 /* Protocols */,
 				E7452E27244FE41D00AF7611 /* Controllers */,
 			);
 			path = OnTheMap;
@@ -132,6 +137,7 @@
 				E729858A2454B83D006E0DB8 /* Requests */,
 				E72985872454B793006E0DB8 /* Responses */,
 				E7809F182452A92E003B10AE /* StudentTableViewCell.swift */,
+				E7B48A662456947100D8AC62 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +150,14 @@
 				E7452E1E244F1EB700AF7611 /* LaunchScreen.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		E7B48A6324564C7500D8AC62 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E7B48A6424564CB600D8AC62 /* Refreshable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,9 +241,11 @@
 				E72985892454B7F0006E0DB8 /* UdacityCredentials.swift in Sources */,
 				E7B48A60245534EE00D8AC62 /* AddLocationViewController.swift in Sources */,
 				E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */,
+				E7B48A6524564CB600D8AC62 /* Refreshable.swift in Sources */,
 				E7809F172452A863003B10AE /* StudentListViewController.swift in Sources */,
 				E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */,
 				E7452E2E244FEFDB00AF7611 /* LoginResponse.swift in Sources */,
+				E7B48A672456947100D8AC62 /* User.swift in Sources */,
 				E72985922454CAED006E0DB8 /* StudentMapViewController.swift in Sources */,
 				E7809F1324513225003B10AE /* StudentTabViewController.swift in Sources */,
 				E72985902454BD85006E0DB8 /* StudentListResponse.swift in Sources */,

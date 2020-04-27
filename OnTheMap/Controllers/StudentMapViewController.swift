@@ -9,9 +9,6 @@
 import UIKit
 import MapKit
 
-protocol Refreshable {
-    func refresh(students: [Student]) -> Void
-}
 
 class StudentMapViewController: UIViewController, Refreshable {
     static var reuseMapId = "studentPin"
