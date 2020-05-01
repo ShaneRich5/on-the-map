@@ -59,7 +59,7 @@
                                     <action selector="loginUsingFacebook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ydp-0l-8fx"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="suN-Rh-0bT">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="suN-Rh-0bT">
                                 <rect key="frame" x="197" y="568" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
@@ -73,6 +73,7 @@
                         <outlet property="activityIndicator" destination="suN-Rh-0bT" id="fMI-2w-BwQ"/>
                         <outlet property="emailTextField" destination="Wrh-rr-Ees" id="qXL-Cn-m68"/>
                         <outlet property="facebookButton" destination="DjI-ma-Uup" id="a3O-Fn-ON2"/>
+                        <outlet property="loginButton" destination="v9p-CI-JeE" id="R0k-pe-cZS"/>
                         <outlet property="passwordTextField" destination="0Xg-DH-wwA" id="qnG-fC-rzz"/>
                         <outlet property="signUpButton" destination="sC2-jz-KKF" id="IId-cL-kei"/>
                         <segue destination="QP9-0O-sP9" kind="show" identifier="goToMap" id="HIE-32-xAz"/>

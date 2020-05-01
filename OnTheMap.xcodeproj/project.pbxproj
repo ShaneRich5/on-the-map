@@ -28,6 +28,8 @@
 		E7B48A622455351700D8AC62 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A612455351700D8AC62 /* AddPinViewController.swift */; };
 		E7B48A6524564CB600D8AC62 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A6424564CB600D8AC62 /* Refreshable.swift */; };
 		E7B48A672456947100D8AC62 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A662456947100D8AC62 /* User.swift */; };
+		E7B48A6924569B3100D8AC62 /* UserDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A6824569B3100D8AC62 /* UserDetailResponse.swift */; };
+		E7B48A6D2456AB5700D8AC62 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A6C2456AB5700D8AC62 /* UserLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		E7B48A612455351700D8AC62 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
 		E7B48A6424564CB600D8AC62 /* Refreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
 		E7B48A662456947100D8AC62 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E7B48A6824569B3100D8AC62 /* UserDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailResponse.swift; sourceTree = "<group>"; };
+		E7B48A6C2456AB5700D8AC62 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 				E729858B2454B867006E0DB8 /* Account.swift */,
 				E729858D2454B883006E0DB8 /* Session.swift */,
 				E729858F2454BD85006E0DB8 /* StudentListResponse.swift */,
+				E7B48A6824569B3100D8AC62 /* UserDetailResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -84,6 +89,7 @@
 			children = (
 				E7452E2B244FE8C300AF7611 /* Credentials.swift */,
 				E72985882454B7F0006E0DB8 /* UdacityCredentials.swift */,
+				E7B48A6C2456AB5700D8AC62 /* UserLocation.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -232,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E729858E2454B883006E0DB8 /* Session.swift in Sources */,
+				E7B48A6924569B3100D8AC62 /* UserDetailResponse.swift in Sources */,
 				E7452E29244FE44D00AF7611 /* LoginViewController.swift in Sources */,
 				E729858C2454B867006E0DB8 /* Account.swift in Sources */,
 				E7809F192452A92E003B10AE /* StudentTableViewCell.swift in Sources */,
@@ -239,6 +246,7 @@
 				E7452E2C244FE8C300AF7611 /* Credentials.swift in Sources */,
 				E7809F1B2452AC08003B10AE /* Student.swift in Sources */,
 				E72985892454B7F0006E0DB8 /* UdacityCredentials.swift in Sources */,
+				E7B48A6D2456AB5700D8AC62 /* UserLocation.swift in Sources */,
 				E7B48A60245534EE00D8AC62 /* AddLocationViewController.swift in Sources */,
 				E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */,
 				E7B48A6524564CB600D8AC62 /* Refreshable.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  File.swift
 //  OnTheMap
 //
 //  Created by Shane Richards on 4/27/20.
@@ -7,10 +7,3 @@
 //
 
 import Foundation
-
-
-class User {
-    var userId: String?
-    var firstName: String?
-    var lastName: String?
-}

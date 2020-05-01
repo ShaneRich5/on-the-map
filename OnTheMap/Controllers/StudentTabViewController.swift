@@ -19,14 +19,13 @@ class StudentTabViewController: UITabBarController {
         
         let refreshIcon = UIImage(named: "icon_refresh")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: refreshIcon, style: .plain, target: self, action: #selector(refresh))
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadStudents()
+        
+        print("StudentTabViewController:viewWillAppear")
+        self.loadStudents()
     }
     
     func loadStudents() {
+        print("StudentTabViewController:loadStudents")
         let url = URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!
         
         var request = URLRequest(url: url)
@@ -39,6 +38,8 @@ class StudentTabViewController: UITabBarController {
                 print("Request Error \(error)")
                 return
             }
+            
+            print("task running...")
 
             DispatchQueue.main.async {
                 do {
@@ -48,12 +49,18 @@ class StudentTabViewController: UITabBarController {
                     let appDelegate = object as! AppDelegate
                     appDelegate.students = result.results
                     
-                    if let refreshableController = self.tabBarController?.selectedViewController as? Refreshable {
-                        refreshableController.refresh(students: result.results)
+//                    print(result.results.count)
+                    if let tabControllers = self.viewControllers as? [Refreshable] {
+                        for controller in tabControllers {
+                            print("result.results \(result.results[0])")
+                            controller.refresh(students: result.results)
+                        }
                     }
                 } catch {
                     print("error occured: \(error)")
                 }
+                
+                print("task ended...")
             }
         }
         
@@ -64,6 +71,7 @@ class StudentTabViewController: UITabBarController {
         print("refreshing...")
         loadStudents()
     }
+    
     
     @objc func addPin() {
         let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (action) in

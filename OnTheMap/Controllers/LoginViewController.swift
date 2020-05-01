@@ -36,7 +36,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.text = "shane.richards121@gmail.com"
-        showRequestInProgress(false)
     }
     
     func showRequestInProgress(_ isInProgress: Bool) {
@@ -46,11 +45,11 @@ class LoginViewController: UIViewController {
             activityIndicator.stopAnimating()
         }
         
-        emailTextField.isEnabled = isInProgress
-        passwordTextField.isEnabled = isInProgress
-        loginButton.isEnabled = isInProgress
-        signUpButton.isEnabled = isInProgress
-        facebookButton.isEnabled = isInProgress
+        emailTextField.isEnabled = !isInProgress
+        passwordTextField.isEnabled = !isInProgress
+        loginButton.isEnabled = !isInProgress
+        signUpButton.isEnabled = !isInProgress
+        facebookButton.isEnabled = !isInProgress
     }
     
     func buildRequestForSession(email: String, password: String) -> URLRequest {
@@ -66,13 +65,23 @@ class LoginViewController: UIViewController {
         return request
     }
     
+    func buildRequestForUser(_ userId: String) -> URLRequest {
+        let endpoint = "https://onthemap-api.udacity.com/v1/users/\(userId)"
+        let url = URL(string: endpoint)!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        return request
+    }
+    
     func parseLoginResponseData(_ data: Data) throws -> LoginResponse {
         let range = 5..<data.count
         let data = data.subdata(in: range)
 
         let decoder = JSONDecoder()
         return try decoder.decode(LoginResponse.self, from: data)
-//        let sessionId = loginResponse.session.id
     }
     
     @IBAction func loginUsingCredentials(_ sender: Any) {
@@ -89,8 +98,28 @@ class LoginViewController: UIViewController {
         
         showRequestInProgress(true)
         
-        let request = buildRequestForSession(email: email, password: password)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let loginTask = login(email, password)
+        loginTask.resume()
+    }
+    
+    func parseUserResponseData(_ data: Data) throws -> UserDetailResponse {
+        let range = 5..<data.count
+        let data = data.subdata(in: range)
+
+        let decoder = JSONDecoder()
+        return try decoder.decode(UserDetailResponse.self, from: data)
+    }
+    
+    func cacheUserDetails(user: User) {
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        return appDelegate.user = user
+    }
+    
+    func getUser(_ userId: String) -> URLSessionTask {
+//        print("getUser")
+        let request = buildRequestForUser(userId)
+        return URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
                 print(error!)
                 return
@@ -100,24 +129,62 @@ class LoginViewController: UIViewController {
                 print("Not data received")
                 return
             }
-
+            
             DispatchQueue.main.async {
                 do {
-                    let loginResponse = try self.parseLoginResponseData(data)
-                    let sessionId = loginResponse.session.id
-
-                    print(sessionId!)
+                    let result = try self.parseUserResponseData(data)
+//                    print("user response: \(result.userId), \(result.firstName) \(result.lastName)")
+                    self.showRequestInProgress(false)
+                    
+                    let user = result.toUser()
+                    self.cacheUserDetails(user: user)
+                    
+                    self.performSegue(withIdentifier: LoginViewController.segueIdentifier, sender: nil)
+//                    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MapTabViewController") as! StudentMapViewController
+                    
                 } catch {
+                    self.showRequestInProgress(false)
                     print(error)
                 }
             }
         }
-
-        task.resume()
     }
     
-    @IBAction func loginUsingFacebook(_ sender: Any) {
+    func login(_ email: String, _ password: String) -> URLSessionTask {
+        let request = buildRequestForSession(email: email, password: password)
+        return URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                print(error!)
+                self.showRequestInProgress(false)
+                return
+            }
+            
+            guard let data = data else {
+                print("Not data received")
+                self.showRequestInProgress(false)
+                return
+            }
+
+            DispatchQueue.main.async {
+                do {
+                    let loginResponse = try self.parseLoginResponseData(data)
+                    
+                    self.sessionId = loginResponse.session.id!
+                    self.userId = loginResponse.account.key!
+                    
+//                    print("user id: \(self.userId), session id: \(self.sessionId)")
+                    
+                    let task = self.getUser(self.userId!)
+                    task.resume()
+                } catch {
+                    self.showRequestInProgress(false)
+                    print(error)
+                }
+            }
+        }
     }
+    
+    @IBAction func loginUsingFacebook(_ sender: Any) {}
     
     func displayAlert(title: String, message: String) -> Void {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

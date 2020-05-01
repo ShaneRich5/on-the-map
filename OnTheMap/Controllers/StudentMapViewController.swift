@@ -15,17 +15,18 @@ class StudentMapViewController: UIViewController, Refreshable {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    var students: [Student]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.students
-    }
-    var annotations: [MKPointAnnotation]!
-    
-    
     func refresh(students: [Student]) {
-        let annotations = self.students.map { student in loadAnnotation(student) }
+        if let currentAnnotations = mapView?.annotations {
+            print("currentAnnotations count: \(currentAnnotations.count)")
+            mapView.removeAnnotations(currentAnnotations)
+        }
+        
+        print("map student: \(students.count)")
+        let annotations = students.map { student in loadAnnotation(student) }
+        print("map annotation: \(annotations.count)")
+                
         mapView.addAnnotations(annotations)
+        print("StudentMapViewController:refresh")
     }
     
     func loadAnnotation(_ student: Student) -> MKPointAnnotation {
@@ -47,15 +48,11 @@ class StudentMapViewController: UIViewController, Refreshable {
         super.viewDidLoad()
         
         self.mapView.delegate = self
-        print(annotations)
+        print("StudentMapViewController:viewDidLoad")
     }
 }
 
 extension StudentMapViewController: MKMapViewDelegate {
-    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-        let annotations = students.map {student in loadAnnotation(student) }
-        self.mapView.addAnnotations(annotations)
-    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: StudentMapViewController.reuseMapId) as? MKPinAnnotationView
@@ -69,7 +66,7 @@ extension StudentMapViewController: MKMapViewDelegate {
         else {
             pinView!.annotation = annotation
         }
-        print(pinView)
+//        print(pinView)
         return pinView
     }
     

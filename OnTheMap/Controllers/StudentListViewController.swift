@@ -13,11 +13,7 @@ class StudentListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let segueIdentifier = "followLink"
-    var students: [Student]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.students
-    }
+    var students = [Student]()
     var selectedIndex = 0
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +24,7 @@ class StudentListViewController: UIViewController {
 
 extension StudentListViewController: Refreshable {
     func refresh(students: [Student]) {
-        self.tableView.reloadData()
+        self.students = students
     }
 }
 
