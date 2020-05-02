@@ -11,8 +11,7 @@ import UIKit
 class StudentListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    let segueIdentifier = "followLink"
+
     var students = [Student]()
     var selectedIndex = 0
     
@@ -45,8 +44,9 @@ extension StudentListViewController: UITableViewDataSource {
 
 extension StudentListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        performSegue(withIdentifier: segueIdentifier, sender: nil)
+        let student = students[indexPath.row]
+        let url = URL(string: student.mediaURL)!
+        UIApplication.shared.open(url)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

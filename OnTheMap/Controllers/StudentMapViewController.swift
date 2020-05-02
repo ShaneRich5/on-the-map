@@ -48,7 +48,6 @@ class StudentMapViewController: UIViewController, Refreshable {
         super.viewDidLoad()
         
         self.mapView.delegate = self
-        print("StudentMapViewController:viewDidLoad")
     }
 }
 
