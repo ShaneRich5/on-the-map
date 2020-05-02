@@ -17,25 +17,10 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var mediaUrlTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        findLocationButton.isEnabled = false
-        locationTextField.delegate = self
-        mediaUrlTextField.delegate = self
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         locationTextField.text = "Kingston, Jamaica" // TODO: set to empty text
         mediaUrlTextField.text = "http://google.com" // TODO: set to empty text
-    }
-    
-    func shouldEnableButton() {
-        if let location = locationTextField.text, let mediaUrl = mediaUrlTextField.text {
-            findLocationButton.isEnabled = !location.isEmpty && !mediaUrl.isEmpty
-        } else {
-            findLocationButton.isEnabled = false
-        }
     }
     
     @IBAction func submitLocation(_ sender: Any) {
@@ -81,20 +66,5 @@ class AddLocationViewController: UIViewController {
             self.navigationController!.pushViewController(controller, animated: true)
             
         })
-    }
-}
-
-extension AddLocationViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        shouldEnableButton()
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        shouldEnableButton()
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        shouldEnableButton()
-        return true
     }
 }
