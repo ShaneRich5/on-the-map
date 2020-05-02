@@ -64,11 +64,18 @@ class AddLocationViewController: UIViewController {
             annotation.coordinate = placemark.coordinate
             annotation.title = placemark.title
             
+            
+            let studentLocation = StudentLocation(uniqueKey: "aaaa", firstName: "Shane", lastName: "Richards", mapString: location, mediaURL: mediaUrl, latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
+            
+            
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
             
             controller.annotation = annotation
             controller.location = location
             controller.mediaUrl = mediaUrl
+            controller.studentLocation = studentLocation
+
+            
             controller.modalPresentationStyle = .fullScreen
             
             self.navigationController!.pushViewController(controller, animated: true)

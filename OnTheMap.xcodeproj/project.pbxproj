@@ -29,9 +29,8 @@
 		E7B48A6524564CB600D8AC62 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A6424564CB600D8AC62 /* Refreshable.swift */; };
 		E7B48A672456947100D8AC62 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A662456947100D8AC62 /* User.swift */; };
 		E7B48A6924569B3100D8AC62 /* UserDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A6824569B3100D8AC62 /* UserDetailResponse.swift */; };
-		E7B48A6D2456AB5700D8AC62 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B48A6C2456AB5700D8AC62 /* UserLocation.swift */; };
 		E7C42BFE245D6EE300B462E1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C42BFD245D6EE300B462E1 /* UIViewController+Extension.swift */; };
-		E7C42C00245DDDD000B462E1 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C42BFF245DDDD000B462E1 /* StudentLocation.swift */; };
+		E7C42C02245DDEA200B462E1 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C42C01245DDEA200B462E1 /* StudentLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,9 +58,8 @@
 		E7B48A6424564CB600D8AC62 /* Refreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
 		E7B48A662456947100D8AC62 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E7B48A6824569B3100D8AC62 /* UserDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailResponse.swift; sourceTree = "<group>"; };
-		E7B48A6C2456AB5700D8AC62 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		E7C42BFD245D6EE300B462E1 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		E7C42BFF245DDDD000B462E1 /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		E7C42C01245DDEA200B462E1 /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +91,7 @@
 			children = (
 				E7452E2B244FE8C300AF7611 /* Credentials.swift */,
 				E72985882454B7F0006E0DB8 /* UdacityCredentials.swift */,
-				E7B48A6C2456AB5700D8AC62 /* UserLocation.swift */,
-				E7C42BFF245DDDD000B462E1 /* StudentLocation.swift */,
+				E7C42C01245DDEA200B462E1 /* StudentLocation.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -252,10 +249,9 @@
 				E7452E2C244FE8C300AF7611 /* Credentials.swift in Sources */,
 				E7809F1B2452AC08003B10AE /* Student.swift in Sources */,
 				E72985892454B7F0006E0DB8 /* UdacityCredentials.swift in Sources */,
-				E7B48A6D2456AB5700D8AC62 /* UserLocation.swift in Sources */,
+				E7C42C02245DDEA200B462E1 /* StudentLocation.swift in Sources */,
 				E7B48A60245534EE00D8AC62 /* AddLocationViewController.swift in Sources */,
 				E7452E14244F1EB500AF7611 /* AppDelegate.swift in Sources */,
-				E7C42C00245DDDD000B462E1 /* StudentLocation.swift in Sources */,
 				E7B48A6524564CB600D8AC62 /* Refreshable.swift in Sources */,
 				E7809F172452A863003B10AE /* StudentListViewController.swift in Sources */,
 				E7452E16244F1EB500AF7611 /* SceneDelegate.swift in Sources */,
