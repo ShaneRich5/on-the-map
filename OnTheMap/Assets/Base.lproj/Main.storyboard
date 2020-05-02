@@ -285,6 +285,10 @@
                                     <action selector="saveStudentLocation:" destination="Zzz-gM-KYX" eventType="touchUpInside" id="B45-CH-kqv"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="goX-jN-tTW">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -299,6 +303,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="90M-A3-TBj"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="goX-jN-tTW" id="rnp-2q-vyX"/>
                         <outlet property="finishButton" destination="ngp-tB-W6r" id="cfV-KT-tbB"/>
                         <outlet property="mapView" destination="Pyc-q0-H2b" id="WPa-IM-gA7"/>
                     </connections>
