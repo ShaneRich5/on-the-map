@@ -24,6 +24,12 @@ class AddLocationViewController: UIViewController {
         mediaUrlTextField.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        locationTextField.text = "Kingston, Jamaica" // TODO: set to empty text
+        mediaUrlTextField.text = "http://google.com" // TODO: set to empty text
+    }
+    
     func shouldEnableButton() {
         if let location = locationTextField.text, let mediaUrl = mediaUrlTextField.text {
             findLocationButton.isEnabled = !location.isEmpty && !mediaUrl.isEmpty
@@ -33,30 +39,40 @@ class AddLocationViewController: UIViewController {
     }
     
     @IBAction func submitLocation(_ sender: Any) {
+        guard let location = locationTextField.text, let mediaUrl = mediaUrlTextField.text else {
+            self.displayDefaultAlert(title: "Missing Info", message: "Please enter a location and url.")
+            return
+        }
+        
+        guard let url = URL(string: mediaUrl), UIApplication.shared.canOpenURL(url) else {
+            self.displayDefaultAlert(title: "Invalid URL", message: "Please enter a valid url value.")
+            return
+        }
+        
         let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = locationTextField.text
+        searchRequest.naturalLanguageQuery = location
         
         let search = MKLocalSearch(request: searchRequest)
+        
         search.start(completionHandler: { response, error in
-            guard let response = response else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error").")
+            guard let placemark = response?.mapItems.first?.placemark, error == nil else {
+                self.displayDefaultAlert(title: "Error", message: error!.localizedDescription)
                 return
             }
             
-            if let placemarker = response.mapItems.first?.placemark {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = placemarker.coordinate
-                annotation.title = placemarker.title
-                
-                let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
-                
-                controller.annotation = annotation
-                controller.location = self.locationTextField.text
-                controller.mediaUrl = self.mediaUrlTextField.text
-                controller.modalPresentationStyle = .fullScreen
-                
-                self.navigationController!.pushViewController(controller, animated: true)
-            }
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = placemark.coordinate
+            annotation.title = placemark.title
+            
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
+            
+            controller.annotation = annotation
+            controller.location = location
+            controller.mediaUrl = mediaUrl
+            controller.modalPresentationStyle = .fullScreen
+            
+            self.navigationController!.pushViewController(controller, animated: true)
+            
         })
     }
 }
