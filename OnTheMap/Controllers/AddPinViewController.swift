@@ -22,7 +22,9 @@ class AddPinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // could parse annotation from student location
         mapView.addAnnotation(annotation)
+        showLoadingState(isLoading: false)
     }
     
     func buildRequestBody() -> Data? {
@@ -48,9 +50,12 @@ class AddPinViewController: UIViewController {
         
         let request = buildRequest(url: url, data: requestBody)
         
+        showLoadingState(isLoading: true)
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 self.displayDefaultAlert(title: "Save Failed!", message: error?.localizedDescription ?? "Error unclear")
+                self.showLoadingState(isLoading: false)
                 return
             }
             
@@ -58,6 +63,7 @@ class AddPinViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
+                self.showLoadingState(isLoading: false)
             }
         }
         task.resume()

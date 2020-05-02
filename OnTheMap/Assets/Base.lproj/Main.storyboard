@@ -230,10 +230,15 @@
                                     <action selector="submitLocation:" destination="wST-MM-2jN" eventType="touchUpInside" id="ndn-Sy-k4X"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="MrE-rA-LGo">
+                                <rect key="frame" x="181" y="608" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="MrE-rA-LGo" firstAttribute="top" secondItem="jjP-uP-ERD" secondAttribute="bottom" constant="16" id="1k9-fK-xin"/>
                             <constraint firstItem="jjP-uP-ERD" firstAttribute="top" secondItem="aFU-n3-YHN" secondAttribute="bottom" constant="16" id="BII-KR-WCd"/>
+                            <constraint firstItem="MrE-rA-LGo" firstAttribute="centerX" secondItem="9fu-zR-ZxL" secondAttribute="centerX" id="FVv-qS-igw"/>
                             <constraint firstItem="aFU-n3-YHN" firstAttribute="top" secondItem="9Ne-qN-BUi" secondAttribute="bottom" constant="16" id="INO-OS-KAk"/>
                             <constraint firstItem="Q5W-J4-7IR" firstAttribute="top" secondItem="9fu-zR-ZxL" secondAttribute="top" constant="55" id="Qhn-Zl-cAf"/>
                             <constraint firstItem="aFU-n3-YHN" firstAttribute="centerX" secondItem="9fu-zR-ZxL" secondAttribute="centerX" id="WIK-uf-4Fc"/>
@@ -246,6 +251,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="2XO-z6-bdO"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="MrE-rA-LGo" id="h3H-gd-QGB"/>
                         <outlet property="findLocationButton" destination="jjP-uP-ERD" id="anf-Mv-9oH"/>
                         <outlet property="locationTextField" destination="9Ne-qN-BUi" id="9Hn-0z-pen"/>
                         <outlet property="mediaUrlTextField" destination="aFU-n3-YHN" id="hfp-3h-Iye"/>
@@ -285,7 +291,7 @@
                                     <action selector="saveStudentLocation:" destination="Zzz-gM-KYX" eventType="touchUpInside" id="B45-CH-kqv"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="goX-jN-tTW">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="goX-jN-tTW">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>

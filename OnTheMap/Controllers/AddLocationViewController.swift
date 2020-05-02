@@ -16,6 +16,7 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var mediaUrlTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -23,14 +24,34 @@ class AddLocationViewController: UIViewController {
         mediaUrlTextField.text = "http://google.com" // TODO: set to empty text
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        showLoading(isLoading: false)
+    }
+    
+    func showLoading(isLoading: Bool) {
+        if isLoading {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        
+        locationTextField.isEnabled = !isLoading
+        mediaUrlTextField.isEnabled = !isLoading
+    }
+    
     @IBAction func submitLocation(_ sender: Any) {
+        showLoading(isLoading: true)
+        
         guard let location = locationTextField.text, let mediaUrl = mediaUrlTextField.text else {
             self.displayDefaultAlert(title: "Missing Info", message: "Please enter a location and url.")
+            self.showLoading(isLoading: false)
             return
         }
         
         guard let url = URL(string: mediaUrl), UIApplication.shared.canOpenURL(url) else {
             self.displayDefaultAlert(title: "Invalid URL", message: "Please enter a valid url value.")
+            self.showLoading(isLoading: false)
             return
         }
         
@@ -39,9 +60,12 @@ class AddLocationViewController: UIViewController {
         
         let search = MKLocalSearch(request: searchRequest)
         
+        showLoading(isLoading: true)
+        
         search.start(completionHandler: { response, error in
             guard let placemark = response?.mapItems.first?.placemark, error == nil else {
                 self.displayDefaultAlert(title: "Error", message: error!.localizedDescription)
+                self.showLoading(isLoading: false)
                 return
             }
             
@@ -64,7 +88,7 @@ class AddLocationViewController: UIViewController {
             controller.modalPresentationStyle = .fullScreen
             
             self.navigationController!.pushViewController(controller, animated: true)
-            
+            showLoading(isLoading: false)
         })
     }
 }
