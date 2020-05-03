@@ -57,62 +57,43 @@ class LoginViewController: UIViewController {
         facebookButton.isEnabled = !isInProgress
     }
     
-    func buildRequestForSession(email: String, password: String) -> URLRequest {
-        let credentials = UdacityCredentials(udacity: Credentials(username: email, password: password))
-        let url = URL(string: "https://onthemap-api.udacity.com/v1/session")!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try! JSONEncoder().encode(credentials) // TODO: alert for errors
-        
-        return request
-    }
-    
-    func buildRequestForUser(_ userId: String) -> URLRequest {
-        let endpoint = "https://onthemap-api.udacity.com/v1/users/\(userId)"
-        let url = URL(string: endpoint)!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        return request
-    }
-    
-    func parseLoginResponseData(_ data: Data) throws -> LoginResponse {
-        let range = 5..<data.count
-        let data = data.subdata(in: range)
-
-        let decoder = JSONDecoder()
-        return try decoder.decode(LoginResponse.self, from: data)
-    }
-    
     @IBAction func loginUsingCredentials(_ sender: Any) {
-//        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MapTabViewController") as! ResultsViewController
-        guard let email = emailTextField?.text else {
-            print("email is required") // TODO: Alert here
-            return
-        }
-        
-        guard let password = passwordTextField?.text else {
-            print("password is empty") // TODO: Alert here
+        guard let email = emailTextField?.text, let password = passwordTextField?.text else {
+            displayDefaultAlert(title: "Validation", message: "Both the email and password fields are required")
             return
         }
         
         showRequestInProgress(true)
         
-        let loginTask = login(email, password)
-        loginTask.resume()
+        UdacityClient.login(email: email, password: password, completion: handleLoginResponse(sessionId:userId:error:))
     }
     
-    func parseUserResponseData(_ data: Data) throws -> UserDetailResponse {
-        let range = 5..<data.count
-        let data = data.subdata(in: range)
-
-        let decoder = JSONDecoder()
-        return try decoder.decode(UserDetailResponse.self, from: data)
+    func handleLoginResponse(sessionId: String?, userId: String?, error: Error?) {
+        guard let sessionId = sessionId, let userId = userId, error == nil else {
+            self.showNetworkError()
+            return
+        }
+        
+        self.sessionId = sessionId
+        self.userId = userId
+        
+        UdacityClient.getUser(userId: userId, completion: handleUserResponse(user:error:))
+    }
+    
+    func handleUserResponse(user: User?, error: Error?) {
+        guard let user = user, error == nil else {
+            self.showNetworkError()
+            return
+        }
+        
+        self.cacheUserDetails(user: user)
+        self.showRequestInProgress(false)
+        self.performSegue(withIdentifier: LoginViewController.segueIdentifier, sender: nil)
+    }
+    
+    func showNetworkError() {
+        self.displayDefaultAlert(title: "Login Failed", message: "An error occured while connecting to the server. Please try again.")
+        self.showRequestInProgress(false)
     }
     
     func cacheUserDetails(user: User) {
@@ -120,75 +101,5 @@ class LoginViewController: UIViewController {
         return appDelegate.user = user
     }
     
-    func getUser(_ userId: String) -> URLSessionTask {
-        let request = buildRequestForUser(userId)
-        return URLSession.shared.dataTask(with: request) { data, response, error in
-            if error != nil {
-                print(error!)
-                return
-            }
-            
-            guard let data = data else {
-                print("Not data received")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                do {
-                    let result = try self.parseUserResponseData(data)
-                    self.showRequestInProgress(false)
-                    
-                    let user = result.toUser()
-                    self.cacheUserDetails(user: user)
-                    
-                    self.performSegue(withIdentifier: LoginViewController.segueIdentifier, sender: nil)
-//                    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MapTabViewController") as! StudentMapViewController
-                    
-                } catch {
-                    self.showRequestInProgress(false)
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    func login(_ email: String, _ password: String) -> URLSessionTask {
-        let request = buildRequestForSession(email: email, password: password)
-        return URLSession.shared.dataTask(with: request) { data, response, error in
-            if error != nil {
-                print(error!)
-                self.showRequestInProgress(false)
-                return
-            }
-            
-            guard let data = data else {
-                print("Not data received")
-                self.showRequestInProgress(false)
-                return
-            }
-
-            DispatchQueue.main.async {
-                do {
-                    let loginResponse = try self.parseLoginResponseData(data)
-                    
-                    self.sessionId = loginResponse.session.id!
-                    self.userId = loginResponse.account.key!
-                    
-                    let task = self.getUser(self.userId!)
-                    task.resume()
-                } catch {
-                    self.showRequestInProgress(false)
-                    print(error)
-                }
-            }
-        }
-    }
-    
     @IBAction func loginUsingFacebook(_ sender: Any) {}
-    
-    func displayAlert(title: String, message: String) -> Void {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        self.present(alert, animated: true, completion: nil)
-    }
 }

@@ -27,7 +27,37 @@ class StudentTabViewController: UITabBarController {
         
         self.navigationItem.title = "On The Map"
         
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
+        
         self.loadStudents()
+    }
+    
+    @objc func logout() {
+        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let _ = data, error != nil else {
+                self.displayNetworkError()
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let appDelegate = self.getApplicationDelegate()
+                appDelegate.studentLocation = nil
+                appDelegate.user = nil
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        task.resume()
     }
     
     func displayNetworkError() {
