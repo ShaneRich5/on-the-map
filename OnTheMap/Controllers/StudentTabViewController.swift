@@ -10,12 +10,20 @@ import UIKit
 
 class StudentTabViewController: UITabBarController {
 
+    func createButtonBarItem(imageName: String, selector: Selector) -> UIBarButtonItem {
+        let icon = UIImage(named: imageName)
+        return UIBarButtonItem(image: icon, style: .plain, target: self, action: selector)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        let mapIcon = UIImage(named: "icon_pin")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: mapIcon, style: .plain, target: self, action: #selector(addPin))
+        self.navigationItem.rightBarButtonItems = [
+            createButtonBarItem(imageName: "icon_pin", selector: #selector(addPin)),
+            createButtonBarItem(imageName: "icon_refresh", selector: #selector(refresh))
+        ]
         
         let refreshIcon = UIImage(named: "icon_refresh")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: refreshIcon, style: .plain, target: self, action: #selector(refresh))
@@ -25,7 +33,6 @@ class StudentTabViewController: UITabBarController {
     }
     
     func loadStudents() {
-        print("StudentTabViewController:loadStudents")
         let url = URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!
         
         var request = URLRequest(url: url)
@@ -38,8 +45,6 @@ class StudentTabViewController: UITabBarController {
                 print("Request Error \(error)")
                 return
             }
-            
-            print("task running...")
 
             DispatchQueue.main.async {
                 do {

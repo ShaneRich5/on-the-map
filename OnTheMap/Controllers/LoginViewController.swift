@@ -28,6 +28,11 @@ class LoginViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    @IBAction func openSignUpLink(_ sender: Any) {
+        let url = URL(string: "https://auth.udacity.com/sign-up")!
+        UIApplication.shared.open(url)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -117,6 +122,7 @@ class LoginViewController: UIViewController {
     }
     
     func getUser(_ userId: String) -> URLSessionTask {
+//        print("getUser")
         let request = buildRequestForUser(userId)
         return URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
