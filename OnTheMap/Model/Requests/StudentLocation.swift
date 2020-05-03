@@ -16,4 +16,15 @@ struct StudentLocation: Codable {
     var mediaURL: String!
     var latitude: Double!
     var longitude: Double!
+    var objectId: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case uniqueKey = "uniqueKey"
+        case firstName = "firstName"
+        case lastName = "lastName"
+        case mapString = "mapString"
+        case mediaURL = "mediaURL"
+        case latitude = "latitude"
+        case longitude = "longitude"
+    }
 }

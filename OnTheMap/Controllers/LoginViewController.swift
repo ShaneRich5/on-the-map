@@ -117,7 +117,6 @@ class LoginViewController: UIViewController {
     }
     
     func getUser(_ userId: String) -> URLSessionTask {
-//        print("getUser")
         let request = buildRequestForUser(userId)
         return URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
@@ -171,8 +170,6 @@ class LoginViewController: UIViewController {
                     
                     self.sessionId = loginResponse.session.id!
                     self.userId = loginResponse.account.key!
-                    
-//                    print("user id: \(self.userId), session id: \(self.sessionId)")
                     
                     let task = self.getUser(self.userId!)
                     task.resume()

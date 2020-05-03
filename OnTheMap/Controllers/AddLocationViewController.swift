@@ -88,7 +88,7 @@ class AddLocationViewController: UIViewController {
             controller.modalPresentationStyle = .fullScreen
             
             self.navigationController!.pushViewController(controller, animated: true)
-            showLoading(isLoading: false)
+            self.showLoading(isLoading: false)
         })
     }
 }
