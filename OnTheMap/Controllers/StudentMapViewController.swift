@@ -17,16 +17,12 @@ class StudentMapViewController: UIViewController, Refreshable {
     
     func refresh(students: [Student]) {
         if let currentAnnotations = mapView?.annotations {
-            print("currentAnnotations count: \(currentAnnotations.count)")
             mapView.removeAnnotations(currentAnnotations)
         }
         
-        print("map student: \(students.count)")
         let annotations = students.map { student in loadAnnotation(student) }
-        print("map annotation: \(annotations.count)")
-                
+
         mapView.addAnnotations(annotations)
-        print("StudentMapViewController:refresh")
     }
     
     func loadAnnotation(_ student: Student) -> MKPointAnnotation {
@@ -46,7 +42,6 @@ class StudentMapViewController: UIViewController, Refreshable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.mapView.delegate = self
     }
 }
@@ -65,16 +60,22 @@ extension StudentMapViewController: MKMapViewDelegate {
         else {
             pinView!.annotation = annotation
         }
-//        print(pinView)
+        
         return pinView
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            if let toOpen = view.annotation?.subtitle! {
-                let url = URL(string: toOpen)!
-                UIApplication.shared.open(url)
+            guard let linkText = view.annotation?.subtitle!, linkText != "" else {
+                return
             }
+            
+            guard let url = URL(string: linkText), UIApplication.shared.canOpenURL(url) else {
+                displayDefaultAlert(title: "Unable to open link", message: "The link value for this pin is invalid")
+                return
+            }
+            
+            UIApplication.shared.open(url)
         }
     }
 }

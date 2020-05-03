@@ -73,8 +73,9 @@ class AddLocationViewController: UIViewController {
             annotation.coordinate = placemark.coordinate
             annotation.title = placemark.title
             
+            let user = self.getApplicationDelegate().user!
             
-            let studentLocation = StudentLocation(uniqueKey: "aaaa", firstName: "Shane", lastName: "Richards", mapString: location, mediaURL: mediaUrl, latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
+            let studentLocation = StudentLocation(uniqueKey: user.userId, firstName: user.firstName, lastName: user.lastName, mapString: location, mediaURL: mediaUrl, latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
             
             
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController

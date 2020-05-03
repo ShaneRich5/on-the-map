@@ -28,6 +28,7 @@ class AddPinViewController: UIViewController {
     }
     
     func buildRequestBody() -> Data? {
+        print(studentLocation)
         let encoder = JSONEncoder()
         return try? encoder.encode(studentLocation)
     }
@@ -61,6 +62,7 @@ class AddPinViewController: UIViewController {
         let request = buildRequest(url: url, data: requestBody)
         
         print(request.httpMethod)
+        print(requestBody)
         
         showLoadingState(isLoading: true)
         
@@ -100,10 +102,9 @@ class AddPinViewController: UIViewController {
     }
     
     func cacheStudentLocation(objectId: String) {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        
         studentLocation.objectId = objectId
+        
+        let appDelegate = self.getApplicationDelegate()
         appDelegate.studentLocation = studentLocation
     }
     

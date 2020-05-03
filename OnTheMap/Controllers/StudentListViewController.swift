@@ -46,7 +46,13 @@ extension StudentListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let student = students[indexPath.row]
         let url = URL(string: student.mediaURL)!
-        UIApplication.shared.open(url)
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            displayDefaultAlert(title: "Unable to open link", message: "The link value for this pin is invalid")
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -16,4 +16,9 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
+    func getApplicationDelegate() -> AppDelegate {
+        let object = UIApplication.shared.delegate
+        return object as! AppDelegate
+    }
 }

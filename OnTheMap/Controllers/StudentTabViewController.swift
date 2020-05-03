@@ -25,11 +25,13 @@ class StudentTabViewController: UITabBarController {
             createButtonBarItem(imageName: "icon_refresh", selector: #selector(refresh))
         ]
         
-        let refreshIcon = UIImage(named: "icon_refresh")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: refreshIcon, style: .plain, target: self, action: #selector(refresh))
+        self.navigationItem.title = "On The Map"
         
-        print("StudentTabViewController:viewWillAppear")
         self.loadStudents()
+    }
+    
+    func displayNetworkError() {
+        self.displayDefaultAlert(title: "Loading Failed", message: "Unable to load students at this time. Please try again later by clicking the refresh icon.")
     }
     
     func loadStudents() {
@@ -42,7 +44,9 @@ class StudentTabViewController: UITabBarController {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
-                print("Request Error \(error)")
+                DispatchQueue.main.async {
+                    self.displayNetworkError()
+                }
                 return
             }
 
@@ -50,22 +54,15 @@ class StudentTabViewController: UITabBarController {
                 do {
                     let decoder = JSONDecoder()
                     let result = try decoder.decode(StudentListResponse.self, from: data)
-                    let object = UIApplication.shared.delegate
-                    let appDelegate = object as! AppDelegate
-                    appDelegate.students = result.results
                     
-//                    print(result.results.count)
                     if let tabControllers = self.viewControllers as? [Refreshable] {
                         for controller in tabControllers {
-                            print("result.results \(result.results[0])")
                             controller.refresh(students: result.results)
                         }
                     }
                 } catch {
-                    print("error occured: \(error)")
+                    self.displayNetworkError()
                 }
-                
-                print("task ended...")
             }
         }
         
@@ -73,27 +70,32 @@ class StudentTabViewController: UITabBarController {
     }
     
     @objc func refresh() {
-        print("refreshing...")
         loadStudents()
     }
     
     
     @objc func addPin() {
-        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (action) in
+        let appDelegate = getApplicationDelegate()
+        
+        if appDelegate.studentLocation != nil {
+            let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (action) in
+                self.performSegue(withIdentifier: "addLocation", sender: nil)
+            //            let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
+            //            controller.modalPresentationStyle = .fullScreen
+            //            self.present(controller, animated: true)
+                    }
+                    
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            
+            let message = "You Have Already Posted a Student Location. Would You Like to Overwrite Your Current Location?"
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            
+            alert.addAction(overwriteAction)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true, completion: nil)
+        } else {
             self.performSegue(withIdentifier: "addLocation", sender: nil)
-//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
-//            controller.modalPresentationStyle = .fullScreen
-//            self.present(controller, animated: true)
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        
-        let message = "You Have Already Posted a Student Location. Would You Like to Overwrite Your Current Location?"
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        
-        alert.addAction(overwriteAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
     }
 }

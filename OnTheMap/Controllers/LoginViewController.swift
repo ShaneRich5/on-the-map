@@ -116,13 +116,11 @@ class LoginViewController: UIViewController {
     }
     
     func cacheUserDetails(user: User) {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
+        let appDelegate = self.getApplicationDelegate()
         return appDelegate.user = user
     }
     
     func getUser(_ userId: String) -> URLSessionTask {
-//        print("getUser")
         let request = buildRequestForUser(userId)
         return URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
@@ -138,7 +136,6 @@ class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 do {
                     let result = try self.parseUserResponseData(data)
-//                    print("user response: \(result.userId), \(result.firstName) \(result.lastName)")
                     self.showRequestInProgress(false)
                     
                     let user = result.toUser()

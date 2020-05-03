@@ -15,7 +15,7 @@ class UserDetailResponse: Codable {
     var userId: String!
     
     enum CodingKeys: String, CodingKey {
-        case firstName = "firstName"
+        case firstName = "first_name"
         case lastName = "last_name"
         case userId = "key"
     }
