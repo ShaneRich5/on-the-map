@@ -9,6 +9,8 @@
 import UIKit
 
 class StudentTabViewController: UITabBarController {
+    
+    var loadStudentTask: URLSessionTask?
 
     func createButtonBarItem(imageName: String, selector: Selector) -> UIBarButtonItem {
         let icon = UIImage(named: imageName)
@@ -33,70 +35,35 @@ class StudentTabViewController: UITabBarController {
     }
     
     @objc func logout() {
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
-        request.httpMethod = "DELETE"
-        var xsrfCookie: HTTPCookie? = nil
-        let sharedCookieStorage = HTTPCookieStorage.shared
-        for cookie in sharedCookieStorage.cookies! {
-            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
-        }
-        if let xsrfCookie = xsrfCookie {
-            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let _ = data, error != nil else {
+        _ = UdacityClient.logout(completion: { success, error in
+            if success && error == nil {
+                _ = self.navigationController?.popToRootViewController(animated: true)
+            } else {
                 self.displayNetworkError()
-                return
             }
-            
-            DispatchQueue.main.async {
-                let appDelegate = self.getApplicationDelegate()
-                appDelegate.studentLocation = nil
-                appDelegate.user = nil
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
-        task.resume()
+        })
     }
     
     func displayNetworkError() {
         self.displayDefaultAlert(title: "Loading Failed", message: "Unable to load students at this time. Please try again later by clicking the refresh icon.")
     }
     
-    func loadStudents() {
-        let url = URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    self.displayNetworkError()
-                }
-                return
-            }
-
-            DispatchQueue.main.async {
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(StudentListResponse.self, from: data)
-                    
-                    if let tabControllers = self.viewControllers as? [Refreshable] {
-                        for controller in tabControllers {
-                            controller.refresh(students: result.results)
-                        }
-                    }
-                } catch {
-                    self.displayNetworkError()
-                }
-            }
+    func handleStudentResponse(students: [Student]?, error: Error?) {
+        guard let students = students, error == nil else {
+            self.displayNetworkError()
+            return
         }
         
-        task.resume()
+        if let tabControllers = self.viewControllers as? [Refreshable] {
+            for controller in tabControllers {
+                controller.refresh(students: students)
+            }
+        }
+    }
+    
+    func loadStudents() {
+        loadStudentTask?.cancel()
+        loadStudentTask = UdacityClient.loadStudents(completion: handleStudentResponse(students:error:))
     }
     
     @objc func refresh() {

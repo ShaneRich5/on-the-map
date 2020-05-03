@@ -28,7 +28,6 @@ class AddPinViewController: UIViewController {
     }
     
     func buildRequestBody() -> Data? {
-        print(studentLocation)
         let encoder = JSONEncoder()
         return try? encoder.encode(studentLocation)
     }
@@ -53,52 +52,47 @@ class AddPinViewController: UIViewController {
         return url
      }
     
+    func postStudentLocation() {
+        
+    }
+    
+    func updateStudentLocation() {
+        
+    }
+    
     @IBAction func saveStudentLocation(_ sender: Any) {
-        guard let url = URL(string: buildUrl()), let requestBody = buildRequestBody() else {
-            self.displayDefaultAlert(title: "Error!", message: "Unable to save your location at this time.")
-            return
-        }
-        
-        let request = buildRequest(url: url, data: requestBody)
-        
-        print(request.httpMethod)
-        print(requestBody)
-        
         showLoadingState(isLoading: true)
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                DispatchQueue.main.async {
-                    self.displayDefaultAlert(title: "Save Failed!", message: error?.localizedDescription ?? "Error unclear")
-                    self.showLoadingState(isLoading: false)
-                }
-                return
-            }
-            
-            print(String(data: data, encoding: .utf8)!)
-            
-            DispatchQueue.main.async {
-                defer {
-                    self.showLoadingState(isLoading: false)
-                }
+        if let objectId = self.studentLocation.objectId {
+            UdacityClient.updateStudentLocation(objectId: objectId, studentLocation: self.studentLocation, completion: { success, error in
                 
-                do {
-                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                        self.displayDefaultAlert(title: "Failed Save Location", message: "Unexpected respnse from server")
-                        return
-                    }
-                    
-                    if let objectId = json["objectId"] as? String {
-                        self.cacheStudentLocation(objectId: objectId)
-                    }
-                    
-                    self.dismiss(animated: true, completion: nil)
-                } catch {
-                    self.displayDefaultAlert(title: "Failed Save Location", message: "Please try again")
+                self.showLoadingState(isLoading: false)
+                
+                if success && error == nil {
+                    self.displayDefaultAlert(title: "Error!", message: "Unable to save your location at this time.")
+                } else {
+                    self.goToTabView()
                 }
+            })
+        } else {
+            UdacityClient.saveStudentLocation(studentLocation: studentLocation, completion: { objectId, error in
+                
+                if let objectId = objectId, error == nil {
+                    self.cacheStudentLocation(objectId: objectId)
+                    self.goToTabView()
+                } else {
+                    self.displayDefaultAlert(title: "Error!", message: "Unable to save your location at this time.")
+                }
+            })
+        }
+    }
+    
+    func goToTabView() {
+        for controller in navigationController!.viewControllers as Array {
+            if controller.isKind(of: StudentTabViewController.self) {
+                navigationController?.popToViewController(controller, animated: true)
             }
         }
-        task.resume()
     }
     
     func cacheStudentLocation(objectId: String) {
