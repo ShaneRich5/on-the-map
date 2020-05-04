@@ -13,28 +13,78 @@ class AddPinViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var finishButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var location: String!
     var mediaUrl: String!
     var annotation: MKPointAnnotation!
+    var studentLocation: StudentLocation!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.addAnnotation(annotation)
+        showLoadingState(isLoading: false)
+    }
+    
+    func showLoadingState(isLoading: Bool) {
+        if isLoading {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        
+        finishButton.isEnabled = !isLoading
+    }
+    
+    func postStudentLocation() {
+        UdacityClient.saveStudentLocation(studentLocation: studentLocation, completion: { objectId, error in
+            
+            if let objectId = objectId, error == nil {
+                self.cacheStudentLocation(objectId: objectId)
+                self.goToTabView()
+            } else {
+                self.displayDefaultAlert(title: "Error!", message: "Unable to save your location at this time.")
+            }
+            
+            self.showLoadingState(isLoading: false)
+        })
+    }
+    
+    func updateStudentLocation(objectId: String) {
+        UdacityClient.updateStudentLocation(objectId: objectId, studentLocation: self.studentLocation, completion: { success, error in
+            
+            if success && error == nil {
+                self.displayDefaultAlert(title: "Error!", message: "Unable to save your location at this time.")
+            } else {
+                self.goToTabView()
+            }
+            
+            self.showLoadingState(isLoading: false)
+        })
     }
     
     @IBAction func saveStudentLocation(_ sender: Any) {
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: .utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-          if error != nil { // Handle error…
-              return
-          }
-          print(String(data: data!, encoding: .utf8)!)
+        showLoadingState(isLoading: true)
+        
+        if let objectId = self.studentLocation.objectId {
+            updateStudentLocation(objectId: objectId)
+        } else {
+            postStudentLocation()
         }
-        task.resume()
+    }
+    
+    func goToTabView() {
+        for controller in navigationController!.viewControllers as Array {
+            if controller.isKind(of: StudentTabViewController.self) {
+                navigationController?.popToViewController(controller, animated: true)
+            }
+        }
+    }
+    
+    func cacheStudentLocation(objectId: String) {
+        studentLocation.objectId = objectId
+        
+        let appDelegate = self.getApplicationDelegate()
+        appDelegate.studentLocation = studentLocation
     }
 }

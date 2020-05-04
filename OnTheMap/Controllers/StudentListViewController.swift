@@ -11,13 +11,8 @@ import UIKit
 class StudentListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    let segueIdentifier = "followLink"
-    var students: [Student]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.students
-    }
+
+    var students = [Student]()
     var selectedIndex = 0
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +23,7 @@ class StudentListViewController: UIViewController {
 
 extension StudentListViewController: Refreshable {
     func refresh(students: [Student]) {
-        self.tableView.reloadData()
+        self.students = students
     }
 }
 
@@ -49,8 +44,15 @@ extension StudentListViewController: UITableViewDataSource {
 
 extension StudentListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        performSegue(withIdentifier: segueIdentifier, sender: nil)
+        let student = students[indexPath.row]
+        let url = URL(string: student.mediaURL)!
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            displayDefaultAlert(title: "Unable to open link", message: "The link value for this pin is invalid")
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

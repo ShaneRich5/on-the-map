@@ -9,25 +9,19 @@
 import UIKit
 import MapKit
 
-protocol Refreshable {
-    func refresh(students: [Student]) -> Void
-}
 
 class StudentMapViewController: UIViewController, Refreshable {
     static var reuseMapId = "studentPin"
 
     @IBOutlet weak var mapView: MKMapView!
     
-    var students: [Student]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.students
-    }
-    var annotations: [MKPointAnnotation]!
-    
-    
     func refresh(students: [Student]) {
-        let annotations = self.students.map { student in loadAnnotation(student) }
+        if let currentAnnotations = mapView?.annotations {
+            mapView.removeAnnotations(currentAnnotations)
+        }
+        
+        let annotations = students.map { student in loadAnnotation(student) }
+
         mapView.addAnnotations(annotations)
     }
     
@@ -48,17 +42,11 @@ class StudentMapViewController: UIViewController, Refreshable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.mapView.delegate = self
-        print(annotations)
     }
 }
 
 extension StudentMapViewController: MKMapViewDelegate {
-    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-        let annotations = students.map {student in loadAnnotation(student) }
-        self.mapView.addAnnotations(annotations)
-    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: StudentMapViewController.reuseMapId) as? MKPinAnnotationView
@@ -72,16 +60,22 @@ extension StudentMapViewController: MKMapViewDelegate {
         else {
             pinView!.annotation = annotation
         }
-        print(pinView)
+        
         return pinView
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            if let toOpen = view.annotation?.subtitle! {
-                let url = URL(string: toOpen)!
-                UIApplication.shared.open(url)
+            guard let linkText = view.annotation?.subtitle!, linkText != "" else {
+                return
             }
+            
+            guard let url = URL(string: linkText), UIApplication.shared.canOpenURL(url) else {
+                displayDefaultAlert(title: "Unable to open link", message: "The link value for this pin is invalid")
+                return
+            }
+            
+            UIApplication.shared.open(url)
         }
     }
 }

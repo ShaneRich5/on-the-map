@@ -9,78 +9,90 @@
 import UIKit
 
 class StudentTabViewController: UITabBarController {
+    
+    var loadStudentTask: URLSessionTask?
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        
-        let mapIcon = UIImage(named: "icon_pin")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: mapIcon, style: .plain, target: self, action: #selector(addPin))
-        
-        let refreshIcon = UIImage(named: "icon_refresh")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: refreshIcon, style: .plain, target: self, action: #selector(refresh))
+    func createButtonBarItem(imageName: String, selector: Selector) -> UIBarButtonItem {
+        let icon = UIImage(named: imageName)
+        return UIBarButtonItem(image: icon, style: .plain, target: self, action: selector)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadStudents()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        self.navigationItem.rightBarButtonItems = [
+            createButtonBarItem(imageName: "icon_pin", selector: #selector(addPin)),
+            createButtonBarItem(imageName: "icon_refresh", selector: #selector(refresh))
+        ]
+        
+        self.navigationItem.title = "On The Map"
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
+        
+        self.loadStudents()
+    }
+    
+    @objc func logout() {
+        _ = UdacityClient.logout(completion: { success, error in
+            if success && error == nil {
+                _ = self.navigationController?.popToRootViewController(animated: true)
+            } else {
+                self.displayNetworkError()
+            }
+        })
+    }
+    
+    func displayNetworkError() {
+        self.displayDefaultAlert(title: "Loading Failed", message: "Unable to load students at this time. Please try again later by clicking the refresh icon.")
+    }
+    
+    func handleStudentResponse(students: [Student]?, error: Error?) {
+        guard let students = students, error == nil else {
+            self.displayNetworkError()
+            return
+        }
+        
+        if let tabControllers = self.viewControllers as? [Refreshable] {
+            for controller in tabControllers {
+                controller.refresh(students: students)
+            }
+        }
     }
     
     func loadStudents() {
-        let url = URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print("Request Error \(error)")
-                return
-            }
-
-            DispatchQueue.main.async {
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(StudentListResponse.self, from: data)
-                    let object = UIApplication.shared.delegate
-                    let appDelegate = object as! AppDelegate
-                    appDelegate.students = result.results
-                    
-                    if let refreshableController = self.tabBarController?.selectedViewController as? Refreshable {
-                        refreshableController.refresh(students: result.results)
-                    }
-                } catch {
-                    print("error occured: \(error)")
-                }
-            }
-        }
-        
-        task.resume()
+        loadStudentTask?.cancel()
+        loadStudentTask = UdacityClient.loadStudents(completion: handleStudentResponse(students:error:))
     }
     
     @objc func refresh() {
-        print("refreshing...")
         loadStudents()
     }
     
+    
     @objc func addPin() {
-        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (action) in
+        let appDelegate = getApplicationDelegate()
+        
+        if appDelegate.studentLocation != nil {
+            let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (action) in
+                self.performSegue(withIdentifier: "addLocation", sender: nil)
+            //            let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
+            //            controller.modalPresentationStyle = .fullScreen
+            //            self.present(controller, animated: true)
+                    }
+                    
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            
+            let message = "You Have Already Posted a Student Location. Would You Like to Overwrite Your Current Location?"
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            
+            alert.addAction(overwriteAction)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true, completion: nil)
+        } else {
             self.performSegue(withIdentifier: "addLocation", sender: nil)
-//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
-//            controller.modalPresentationStyle = .fullScreen
-//            self.present(controller, animated: true)
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        
-        let message = "You Have Already Posted a Student Location. Would You Like to Overwrite Your Current Location?"
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        
-        alert.addAction(overwriteAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
     }
 }

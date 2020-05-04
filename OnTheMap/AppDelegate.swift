@@ -12,6 +12,8 @@ import UIKit
  class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var students = [Student]()
+    var studentLocation: StudentLocation?
+    var user: User?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
