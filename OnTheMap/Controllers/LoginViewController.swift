@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func openSignUpLink(_ sender: Any) {
-        let url = URL(string: "https://auth.udacity.com/sign-up")!
+        let url = URL(string: UdacityClient.signUpUrl)!
         UIApplication.shared.open(url)
     }
     
@@ -40,7 +40,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextField.text = "shane.richards121@gmail.com"
+        emailTextField.text = ""
+        passwordTextField.text = ""
     }
     
     func showRequestInProgress(_ isInProgress: Bool) {
@@ -54,7 +55,6 @@ class LoginViewController: UIViewController {
         passwordTextField.isEnabled = !isInProgress
         loginButton.isEnabled = !isInProgress
         signUpButton.isEnabled = !isInProgress
-        facebookButton.isEnabled = !isInProgress
     }
     
     @IBAction func loginUsingCredentials(_ sender: Any) {
@@ -100,6 +100,4 @@ class LoginViewController: UIViewController {
         let appDelegate = self.getApplicationDelegate()
         return appDelegate.user = user
     }
-    
-    @IBAction func loginUsingFacebook(_ sender: Any) {}
 }

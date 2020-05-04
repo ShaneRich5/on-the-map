@@ -73,16 +73,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DjI-ma-Uup">
-                                <rect key="frame" x="107" y="800" width="200" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="sVv-s2-FED"/>
-                                </constraints>
-                                <state key="normal" title="Log in with Facebook"/>
-                                <connections>
-                                    <action selector="loginUsingFacebook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ydp-0l-8fx"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -91,7 +81,6 @@
                             <constraint firstItem="xkY-pe-4c9" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="MzG-Gz-Yhw"/>
                             <constraint firstItem="suN-Rh-0bT" firstAttribute="top" secondItem="foS-3b-xXZ" secondAttribute="bottom" constant="16" id="Nn9-an-q1b"/>
                             <constraint firstItem="suN-Rh-0bT" firstAttribute="centerX" secondItem="v9p-CI-JeE" secondAttribute="centerX" id="OTD-bG-Fib"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DjI-ma-Uup" secondAttribute="bottom" constant="32" id="OvT-Dl-7dH"/>
                             <constraint firstItem="foS-3b-xXZ" firstAttribute="centerX" secondItem="v9p-CI-JeE" secondAttribute="centerX" id="PYY-Hb-SLy"/>
                             <constraint firstItem="xkY-pe-4c9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="34" id="bzb-nf-kVr"/>
                             <constraint firstItem="v9p-CI-JeE" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eo5-FW-nKi"/>
@@ -99,7 +88,6 @@
                             <constraint firstItem="foS-3b-xXZ" firstAttribute="top" secondItem="v9p-CI-JeE" secondAttribute="bottom" constant="16" id="q3V-1l-KmE"/>
                             <constraint firstItem="v9p-CI-JeE" firstAttribute="top" secondItem="0Xg-DH-wwA" secondAttribute="bottom" constant="16" id="sQG-j8-UEy"/>
                             <constraint firstItem="0Xg-DH-wwA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="unb-EK-kdW"/>
-                            <constraint firstItem="DjI-ma-Uup" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zIQ-1f-eSb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -108,7 +96,6 @@
                     <connections>
                         <outlet property="activityIndicator" destination="suN-Rh-0bT" id="fMI-2w-BwQ"/>
                         <outlet property="emailTextField" destination="Wrh-rr-Ees" id="qXL-Cn-m68"/>
-                        <outlet property="facebookButton" destination="DjI-ma-Uup" id="a3O-Fn-ON2"/>
                         <outlet property="loginButton" destination="v9p-CI-JeE" id="R0k-pe-cZS"/>
                         <outlet property="passwordTextField" destination="0Xg-DH-wwA" id="qnG-fC-rzz"/>
                         <outlet property="signUpButton" destination="sC2-jz-KKF" id="IId-cL-kei"/>

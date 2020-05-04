@@ -11,6 +11,7 @@ import Foundation
 
 class UdacityClient {
     static let securityCharacters = ")]}'"
+    static let signUpUrl = "https://auth.udacity.com/sign-up"
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"

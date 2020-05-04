@@ -20,8 +20,8 @@ class AddLocationViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        locationTextField.text = "Kingston, Jamaica" // TODO: set to empty text
-        mediaUrlTextField.text = "http://google.com" // TODO: set to empty text
+        locationTextField.text = ""
+        mediaUrlTextField.text = ""
     }
     
     override func viewDidLoad() {
@@ -69,27 +69,32 @@ class AddLocationViewController: UIViewController {
                 return
             }
             
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = placemark.coordinate
-            annotation.title = placemark.title
-            
-            let user = self.getApplicationDelegate().user!
-            
-            let studentLocation = StudentLocation(uniqueKey: user.userId, firstName: user.firstName, lastName: user.lastName, mapString: location, mediaURL: mediaUrl, latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
-            
-            
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
-            
-            controller.annotation = annotation
-            controller.location = location
-            controller.mediaUrl = mediaUrl
-            controller.studentLocation = studentLocation
-
-            
-            controller.modalPresentationStyle = .fullScreen
+            let controller = self.prepareController(placemark: placemark, location: location, mediaUrl: mediaUrl)
             
             self.navigationController!.pushViewController(controller, animated: true)
             self.showLoading(isLoading: false)
         })
+    }
+    
+    func prepareController(placemark: MKPlacemark, location: String, mediaUrl: String) -> AddPinViewController {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.title
+        
+        let user = self.getApplicationDelegate().user!
+        
+        let studentLocation = StudentLocation(uniqueKey: user.userId, firstName: user.firstName, lastName: user.lastName, mapString: location, mediaURL: mediaUrl, latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
+        
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
+        
+        controller.annotation = annotation
+        controller.location = location
+        controller.mediaUrl = mediaUrl
+        controller.studentLocation = studentLocation
+        
+        controller.modalPresentationStyle = .fullScreen
+        
+        return controller
     }
 }
