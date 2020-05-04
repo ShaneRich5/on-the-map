@@ -42,6 +42,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         emailTextField.text = ""
         passwordTextField.text = ""
+        emailTextField.autocapitalizationType = .none
     }
     
     func showRequestInProgress(_ isInProgress: Bool) {
