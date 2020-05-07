@@ -76,17 +76,7 @@ class UdacityClient {
             let decoder = JSONDecoder()
             
             do {
-                print("jsonData: \(jsonData)")
-                
-//                if let dictionary = jsonData as? [String: Any] {
-//                    print(dictionary)
-//                } else {
-//                    print()
-//                }
-                print("jsonData base64", jsonData.base64EncodedString())
-                
                 let responseObject = try decoder.decode(responseType, from: jsonData)
-                print("responseObject: \(responseObject)")
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
                 }
