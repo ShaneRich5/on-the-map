@@ -47,7 +47,13 @@ class UdacityClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
+            var hasValidResponse = false
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                hasValidResponse = (200...299).contains(httpResponse.statusCode)
+            }
+            
+            guard hasValidResponse == true, let data = data, error == nil else {
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
@@ -69,7 +75,17 @@ class UdacityClient {
             let decoder = JSONDecoder()
             
             do {
+                print("jsonData: \(jsonData)")
+                
+//                if let dictionary = jsonData as? [String: Any] {
+//                    print(dictionary)
+//                } else {
+//                    print()
+//                }
+                print("jsonData base64", jsonData.base64EncodedString())
+                
                 let responseObject = try decoder.decode(responseType, from: jsonData)
+                print("responseObject: \(responseObject)")
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
                 }

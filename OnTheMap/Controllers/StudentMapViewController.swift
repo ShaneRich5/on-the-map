@@ -65,6 +65,7 @@ extension StudentMapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
         if control == view.rightCalloutAccessoryView {
             guard let linkText = view.annotation?.subtitle!, linkText != "" else {
                 return

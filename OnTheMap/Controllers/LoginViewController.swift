@@ -25,6 +25,8 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        emailTextField.text = ""
+        passwordTextField.text = ""
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -40,8 +42,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextField.text = ""
-        passwordTextField.text = ""
         emailTextField.autocapitalizationType = .none
     }
     
@@ -59,7 +59,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginUsingCredentials(_ sender: Any) {
-        guard let email = emailTextField?.text, let password = passwordTextField?.text else {
+        guard let email = emailTextField?.text, let password = passwordTextField?.text, !email.isEmpty, !password.isEmpty else {
             displayDefaultAlert(title: "Validation", message: "Both the email and password fields are required")
             return
         }
