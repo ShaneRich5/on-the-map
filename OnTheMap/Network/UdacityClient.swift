@@ -15,6 +15,7 @@ class UdacityClient {
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
+        static let orderByParam = "?order=-updatedAt"
         
         case session
         case getUser(String)
@@ -28,7 +29,7 @@ class UdacityClient {
             case .getUser(let userId):
                 return "\(Endpoints.base)/users/\(userId)"
             case .studentLocation:
-                return Endpoints.base + "/StudentLocation"
+                return Endpoints.base + "/StudentLocation\(Endpoints.orderByParam)"
             case .studentLocationChange(let objectId):
                 return "\(Endpoints.base)/StudentLocation/\(objectId)"
             }
