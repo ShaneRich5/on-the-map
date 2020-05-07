@@ -23,6 +23,8 @@ class AddPinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.addAnnotation(annotation)
+        let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
+        mapView.setRegion(region, animated: true)
         showLoadingState(isLoading: false)
     }
     
